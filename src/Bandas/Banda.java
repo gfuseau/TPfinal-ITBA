@@ -1,6 +1,6 @@
 package Bandas;
 
-import java.util.*;
+import java.util.Date;
 
 public class Banda {
 	private String solista, genero, estilo, fb, tw, redes, discos, videoclip, video, barrio;
@@ -37,100 +37,100 @@ public class Banda {
 	}
 
 	// ANALIZADORES
-	public String getsolista() {
+	public String getSolista() {
 		return solista;
 	}
 
-	public String getgenero() {
+	public String getGenero() {
 		return genero;
 	}
 
-	public String getestilo() {
+	public String getEstilo() {
 		return estilo;
 	}
 
-	public Date getfecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public String getfb() {
+	public String getFb() {
 		return fb;
 	}
 
-	public String gettw() {
+	public String getTw() {
 		return tw;
 	}
 
-	public String getredes() {
+	public String getRedes() {
 		return redes;
 	}
 
-	public String getdiscos() {
+	public String getDiscos() {
 		return discos;
 	}
 
-	public String getvideoclip() {
+	public String getVideoclip() {
 		return videoclip;
 	}
 
-	public String getvideo() {
+	public String getVideo() {
 		return video;
 	}
 
-	public String getbarrio() {
+	public String getBarrio() {
 		return barrio;
 	}
 
-	public int getcant() {
+	public int getCant() {
 		return cant;
 	}
 
 	// MODIFICADORES
-	public void setsolista(String solista) {
+	public void setSolista(String solista) {
 		this.solista = solista;
 	}
 
-	public void setgenero(String genero) {
+	public void setGenero(String genero) {
 		this.genero = genero;
 	}
 
-	public void setestilo(String estilo) {
+	public void setEstilo(String estilo) {
 		this.estilo = estilo;
 	}
 
-	public void setfecha(Date fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
-	public void setfb(String fb) {
+	public void setFb(String fb) {
 		this.fb = fb;
 	}
 
-	public void settw(String tw) {
+	public void setTw(String tw) {
 		this.tw = tw;
 	}
 
-	public void setredes(String redes) {
+	public void setRedes(String redes) {
 		this.redes = redes;
 	}
 
-	public void setdiscos(String discos) {
+	public void setDiscos(String discos) {
 		this.discos = discos;
 	}
 
-	public void setvideoclip(String videoclip) {
+	public void setVideoclip(String videoclip) {
 		this.videoclip = videoclip;
 	}
 
-	public void setvideo(String video) {
+	public void setVideo(String video) {
 		this.video = video;
 	}
 
-	public void setbarrio(String barrio) {
+	public void setBarrio(String barrio) {
 		this.barrio = barrio;
 	}
 
-	public void setcant(int cant) {
+	public void setCant(int cant) {
 		this.cant = cant;
 	}
 }
