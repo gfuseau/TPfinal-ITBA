@@ -4,25 +4,27 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Banda {
-	private String solista, genero, estilo, fb, tw, redes, discos, videoclip, video, barrio;
+	private String solista, genero, estilo, fb, tw, barrio;
+	private String[] redes, discos, videoclip, video;
 	private int integrantes;
 	private Date fecha;
 
-	//TODO: aca hay que hacer un arbol binario, implemente la lista unicamente para ver si se estaban almacenando las bandas al leer el csv.
-	static ArrayList<Banda> lista = new ArrayList<Banda>();
+	static ListaSimple lista = new ListaSimple();
 
 	// CONSTRUCTORES
+
+	public Banda(){}
+
 	public Banda(String solista, String genero, Date fecha, int integrantes) {
 		this.solista = solista;
 		this.genero = genero;
 		this.fecha = fecha;
 		this.integrantes = integrantes;
-		//TODO: cuando nos ocupemos de crear el arbol hay que ingresar los datos aca
 		lista.add(this);
 	}
 
-	public Banda(String solista, String genero, String estilo, Date fecha, String fb, String tw, String redes,
-			String discos, String videoclip, String video, String barrio, int integrantes) {
+	public Banda(String solista, String genero, String estilo, Date fecha, String fb, String tw, String[] redes,
+			String[] discos, String[] videoclip, String[] video, String barrio, int integrantes) {
 		this.solista = solista;
 		this.genero = genero;
 		this.estilo = estilo;
@@ -40,7 +42,6 @@ public class Banda {
 		this.video = video;
 		this.barrio = barrio;
 		this.integrantes = integrantes;
-		//TODO: Mismo que en el otro constructor
 		lista.add(this);
 	}
 
@@ -69,19 +70,19 @@ public class Banda {
 		return tw;
 	}
 
-	public String getRedes() {
+	public String[] getRedes() {
 		return redes;
 	}
 
-	public String getDiscos() {
+	public String[] getDiscos() {
 		return discos;
 	}
 
-	public String getVideoclip() {
+	public String[] getVideoclip() {
 		return videoclip;
 	}
 
-	public String getVideo() {
+	public String[] getVideo() {
 		return video;
 	}
 
@@ -92,6 +93,8 @@ public class Banda {
 	public int getIntegrantes() {
 		return integrantes;
 	}
+
+	public ListaSimple getLista(){return lista;}
 
 	// MODIFICADORES
 	public void setSolista(String solista) {
@@ -118,19 +121,19 @@ public class Banda {
 		this.tw = tw;
 	}
 
-	public void setRedes(String redes) {
+	public void setRedes(String[] redes) {
 		this.redes = redes;
 	}
 
-	public void setDiscos(String discos) {
+	public void setDiscos(String[] discos) {
 		this.discos = discos;
 	}
 
-	public void setVideoclip(String videoclip) {
+	public void setVideoclip(String[] videoclip) {
 		this.videoclip = videoclip;
 	}
 
-	public void setVideo(String video) {
+	public void setVideo(String[] video) {
 		this.video = video;
 	}
 
