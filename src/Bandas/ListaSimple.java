@@ -1,8 +1,7 @@
 package Bandas;
 
 public class ListaSimple {
-
-    private Nodo inicio;
+	private Nodo inicio;
 
     //CONSTRUCTORES
 

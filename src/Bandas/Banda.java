@@ -10,7 +10,7 @@ public class Banda {
 	private Date fecha;
 
 	static ListaSimple lista = new ListaSimple();
-
+	Arbol arbol = new Arbol();
 	// CONSTRUCTORES
 
 	public Banda(){}
@@ -21,6 +21,8 @@ public class Banda {
 		this.fecha = fecha;
 		this.integrantes = integrantes;
 		lista.add(this);
+		NodoArbol nodo = new NodoArbol(this);
+		arbol.ingresarNodo(nodo);
 	}
 
 	public Banda(String solista, String genero, String estilo, Date fecha, String fb, String tw, String[] redes,
@@ -43,6 +45,8 @@ public class Banda {
 		this.barrio = barrio;
 		this.integrantes = integrantes;
 		lista.add(this);
+		NodoArbol nodo = new NodoArbol(this);
+		arbol.ingresarNodo(nodo);
 	}
 
 	// ANALIZADORES

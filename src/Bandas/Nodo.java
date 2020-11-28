@@ -1,8 +1,7 @@
 package Bandas;
 
 public class Nodo {
-
-    private Banda banda;
+	private Banda banda;
     private Nodo siguiente;
 
     //Constructores
@@ -33,5 +32,4 @@ public class Nodo {
     public Nodo getSiguiente() {
         return siguiente;
     }
-
 }

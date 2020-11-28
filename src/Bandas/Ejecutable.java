@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.io.*;
 
 public class Ejecutable {
-
+	
 	public static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -29,6 +29,8 @@ public class Ejecutable {
                 case 3:
                     break;
                 case 4:
+                	//ya esta hecho el arbol, habria que ver como lo instanciamos en esta clase ejecutable
+                	//arbol.inorden(raiz);
                     break;
                 case 5:
                     break;
@@ -94,7 +96,7 @@ public class Ejecutable {
     }
 
     public static void readCSV() {
-        String path = "./bandas-inscriptas.csv";
+        String path = "C:\\Users\\54115\\Documents\\Ramiro\\Programacion\\dataset\\bandas-inscriptas.csv";
         String line = "";
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
