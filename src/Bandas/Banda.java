@@ -1,22 +1,28 @@
 package Bandas;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Banda {
 	private String solista, genero, estilo, fb, tw, redes, discos, videoclip, video, barrio;
-	private int cant;
+	private int integrantes;
 	private Date fecha;
 
+	//TODO: aca hay que hacer un arbol binario, implemente la lista unicamente para ver si se estaban almacenando las bandas al leer el csv.
+	static ArrayList<Banda> lista = new ArrayList<Banda>();
+
 	// CONSTRUCTORES
-	public Banda(String solista, String genero, Date fecha, int cant) {
+	public Banda(String solista, String genero, Date fecha, int integrantes) {
 		this.solista = solista;
 		this.genero = genero;
 		this.fecha = fecha;
-		this.cant = cant;
+		this.integrantes = integrantes;
+		//TODO: cuando nos ocupemos de crear el arbol hay que ingresar los datos aca
+		lista.add(this);
 	}
 
 	public Banda(String solista, String genero, String estilo, Date fecha, String fb, String tw, String redes,
-			String discos, String videoclip, String video, String barrio, int cant) {
+			String discos, String videoclip, String video, String barrio, int integrantes) {
 		this.solista = solista;
 		this.genero = genero;
 		this.estilo = estilo;
@@ -33,7 +39,9 @@ public class Banda {
 		// video tambien
 		this.video = video;
 		this.barrio = barrio;
-		this.cant = cant;
+		this.integrantes = integrantes;
+		//TODO: Mismo que en el otro constructor
+		lista.add(this);
 	}
 
 	// ANALIZADORES
@@ -81,8 +89,8 @@ public class Banda {
 		return barrio;
 	}
 
-	public int getCant() {
-		return cant;
+	public int getIntegrantes() {
+		return integrantes;
 	}
 
 	// MODIFICADORES
@@ -130,7 +138,8 @@ public class Banda {
 		this.barrio = barrio;
 	}
 
-	public void setCant(int cant) {
-		this.cant = cant;
+	public void setIntegrantes(int integrantes) {
+		this.integrantes = integrantes;
 	}
+
 }

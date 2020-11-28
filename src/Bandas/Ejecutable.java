@@ -1,52 +1,25 @@
 package Bandas;
+
+import java.text.ParseException;
 import java.util.InputMismatchException;
 import java.text.SimpleDateFormat;  
 import java.util.Date;
 import java.util.Scanner;
 import java.io.*;
+
 public class Ejecutable {
+
 	public static Scanner scanner = new Scanner(System.in);
-    public static void generarTitulo() {
-        // TODO: pongan sus nombres y legajos
-        final String titulo = "Trabajo Práctico Final de Estructura de Datos y Programación\n\n"
-                + "Integrantes:\n"
-                + "\t Gastón Emanuel Fuseau \t 57433 \n"
-                + "\t Ramiro Vozzi \t 57741 \n"
-                + "\t Bautista \t xxxxx \n";
-        System.out.println(titulo);
-    }
-    public static void readCSV() {
-    	String path = "C:\\Users\\54115\\Documents\\Ramiro\\Programacion\\dataset\\bandas-inscriptas.csv";
-    	String line = "";
-    	try {
-			BufferedReader br = new BufferedReader(new FileReader(path));
-			
-			while((line = br.readLine())!=null) {
-				//habria que usar un contador para no agarrar la primera linea
-				String [] values = line.split(";");
-				/*Banda banda = Banda(values[0], values[1], values[2], values[3].toDate(), 
-						values[4], values[5], values[6], values[7], 
-						values[8], values[9], values[10], values[11]);
-				System.out.print("Nombre del solista: " + values[0] + "\n");*/
-				
-			}
-			
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
+
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		generarTitulo(); generarMenu();
+		generarTitulo();
 		readCSV();
-        int opcion;
+		boolean deseaSalir = false;
+
         do {
-            opcion = pedirInt("Ingrese la opción deseada, o ingrese 0 para volver a ver el menú: ");
-            switch (opcion) {
+            switch (menu()) {
                 case 0:
-                    generarMenu();
+                    menu();
                     break;
                 case 1:
                     // visualizarBandas();
@@ -70,13 +43,15 @@ public class Ejecutable {
                 case 10:
                     break;
                 case 11:
-                    System.out.println("Saliendo del programa.");
+                    deseaSalir = true;
+                    print("Saliendo del programa.");
                     break;
                 default:
-                    System.out.println("Por favor ingrese un número entre 1 y 11.");
+                    print("Por favor ingrese un número entre 1 y 11.");
             }
-        } while (opcion != 11);
+        } while (!deseaSalir);
 	}
+
 	public static int pedirInt(String frase) {
         while(true) {
             try {  
@@ -90,8 +65,9 @@ public class Ejecutable {
         }
     }
 
-    public static void generarMenu() {
-        final String menu = "Elija una opción del siguiente menú:\n"
+    public static int menu() {
+        print("\n------------------------------------------------------------\n");
+        print("Elija una opción del siguiente menú:\n"
                 + "[1]  Visualizar la cantidad de bandas en un barrio.\n"
                 + "[2]  Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relación con el total.\n"
                 + "[3]  Visualizar para cada barrio segun el género musical más tocado por las bandas, la personalidad que prevalece según los estudios mostrados anteriormente.\n"
@@ -102,12 +78,51 @@ public class Ejecutable {
                 + "[8]  Visualizar el promedio de integrantes por Género musical."
                 + "[9]  Visualizar las 10 primeras bandas con más presencia en las redes sociales.\n"
                 + "[10] Mostar en cada barrio cuál es el género de música que las bandas tocan más.\n"
-                + "[11] Salir.";
-        System.out.println();
-        System.out.println("------------------------------------------------------------");
-        System.out.println(menu);
-        System.out.println("------------------------------------------------------------");
-        System.out.println();
+                + "[11] Salir.");
+        print("\n------------------------------------------------------------\n");
+
+        return scanner.nextInt();
+    }
+
+    public static void generarTitulo() {
+        final String titulo = "Trabajo Practico Final de Estructura de Datos y Programacion\n\n"
+                + "Integrantes:\n"
+                + "\t Gaston Emanuel Fuseau \t 57433 \n"
+                + "\t Ramiro Vozzi \t 57741 \n"
+                + "\t Bautista Cardenau \t 58040";
+        print(titulo);
+    }
+
+    public static void readCSV() {
+        String path = "./bandas-inscriptas.csv";
+        String line = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            boolean isHeaders = true;
+
+            while((line = br.readLine())!=null) {
+                String [] values = line.split(";");
+                if (isHeaders){
+                    isHeaders = false;
+                } else {
+                    //TODO: separar discos o cualquier campo que tenga mas de uno. Posiblemente usar listas para esos campos.
+                    Banda banda = new Banda(values[0], values[1], values[2], parseDate(values[3]),
+						values[4], values[5], values[6], values[7],
+						values[8], values[9], values[10], Integer.parseInt(values[11]));
+                }
+            }
+        } catch (IOException | ParseException e) {
+            print(e.getMessage());
+        }
+	}
+
+    public static void print(Object x){
+	    System.out.println(x);
+    }
+
+    public static Date parseDate(String date) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        return dateFormat.parse(date);
     }
 
 
