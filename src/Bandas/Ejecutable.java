@@ -1,6 +1,7 @@
 package Bandas;
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.text.SimpleDateFormat;  
 import java.util.Date;
@@ -11,9 +12,12 @@ public class Ejecutable {
 	
 	public static Scanner scanner = new Scanner(System.in);
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		generarTitulo();
 		leerCSV();
+
+        HashMap<String, String[]> musicaPersonalidad = iniciarMusicaPersonalidad();
+
         boolean deseaSalir = false;
 
         do {
@@ -55,10 +59,10 @@ public class Ejecutable {
                     break;
                 case 11:
                     deseaSalir = true;
-                    println("Saliendo del programa.\n");
+                    print("Saliendo del programa.\n");
                     break;
                 default:
-                    println("Por favor ingrese un numero entre 1 y 11.");
+                    print("Por favor ingrese un numero entre 1 y 11.");
             }
         } while (!deseaSalir);
 	}
@@ -71,7 +75,7 @@ public class Ejecutable {
                 scanner.nextLine();
                 return in;
             } catch (InputMismatchException | NumberFormatException e) {
-                println("El numero ingresado no es valido. Intentelo nuevamente.\n");
+                print("El numero ingresado no es valido. Intentelo nuevamente.\n");
                 scanner.next();
             }
         }
@@ -84,8 +88,8 @@ public class Ejecutable {
     }
 
     public static int menu() {
-        println("\n------------------------------------------------------------\n");
-        println("Elija una opcion del siguiente menu:\n"
+        print("\n------------------------------------------------------------\n");
+        print("Elija una opcion del siguiente menu:\n"
                 + "[1]  Visualizar la cantidad de bandas en un barrio.\n"
                 + "[2]  Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relacion con el total.\n"
                 + "[3]  Visualizar para cada barrio segun el genero musical mas tocado por las bandas, la personalidad que prevalece segun los estudios mostrados anteriormente.\n"
@@ -97,7 +101,7 @@ public class Ejecutable {
                 + "[9]  Visualizar las 10 primeras bandas con mas presencia en las redes sociales.\n"
                 + "[10] Mostar en cada barrio cual es el genero de musica que las bandas tocan mas.\n"
                 + "[11] Salir.");
-        println("\n------------------------------------------------------------\n");
+        print("\n------------------------------------------------------------\n");
 
         return pedirInt("");
     }
@@ -108,7 +112,7 @@ public class Ejecutable {
                 + "\t Gaston Emanuel Fuseau \t 57433 \n"
                 + "\t Ramiro Vozzi \t\t 57741 \n"
                 + "\t Bautista Cardenau \t 58040";
-        println(titulo);
+        print(titulo);
     }
 
     public static void leerCSV() {
@@ -152,6 +156,8 @@ public class Ejecutable {
             }
         }
 
+        //print(Banda.lista.getInicio().getBanda().toString()); SI QUIEREN  VER COMO QUEDO EL TOSTRING DE BANDA CORRAN EL PROGRAMA CON ESTA LINEA
+
         br.close();
     }
 
@@ -174,21 +180,34 @@ public class Ejecutable {
            {}  
     }
 
-    public static void println(Object x) {
-        System.out.println(x);
-    }
-
     public static void printf(String format, Object ... args) {
         System.out.printf(format, args);
     }
 
     public static void print(Object x) {
-        System.out.print(x);
+        System.out.println(x);
     }
 
     public static Date parseDate(String date) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         return dateFormat.parse(date);
+    }
+
+    public static HashMap<String, String[]> iniciarMusicaPersonalidad(){
+        HashMap<String, String[]> musicaPersonalidad = new HashMap<>();
+        musicaPersonalidad.put("blues", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
+        musicaPersonalidad.put("jazz", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
+        musicaPersonalidad.put("soul", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
+        musicaPersonalidad.put("rap", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
+        musicaPersonalidad.put("opera", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
+        musicaPersonalidad.put("clasica", new String[] {"Alta autoestima", "Creativos", "Amables", "Introvertidos"});
+        musicaPersonalidad.put("country", new String[] {"Trabajadores", "Extrovertidos"});
+        musicaPersonalidad.put("reggae", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos", "Vagos"});
+        musicaPersonalidad.put("dance", new String[] {"Creativos", "Poco amables", "Extrovertidos"});
+        musicaPersonalidad.put("indie", new String[] {"Baja autoestima", "Creativos", "Poco amables", "Poco trabajadores"});
+        musicaPersonalidad.put("rock", new String[] {"Baja autoestima", "Creativos", "Amables", "Poco trabajadores", "Introvertidos"});
+        musicaPersonalidad.put("metal", new String[] {"Baja autoestima", "Creativos", "Amables", "Poco trabajadores", "Introvertidos"});
+        return musicaPersonalidad;
     }
 
 }

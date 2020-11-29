@@ -2,8 +2,10 @@ package Bandas;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+
 
 public class Banda {
 	private String solista, genero, estilo, fb, tw, barrio;
@@ -15,10 +17,19 @@ public class Banda {
 	static Arbol arbol = new Arbol();
 	static Set<String> generos = new HashSet<String>();
 	static Set<String> barrios = new HashSet<String>();
+	static HashMap<String, ListaSimpleCadenas> bandas = new HashMap<>();
+
+	/*
+	Crear un Map llamado bandas que tenga como clave el género de música tocado por las
+bandas y como valor el nombre del solista de cada banda, barrio y la cantidad de
+integrantes
+	 */
 
 	// CONSTRUCTORES
 
 	public Banda() {
+		//TODO: aca habria que actualizar los estaticos tambien. Tenemos un problema si creamos la banda con este constructor porque nunca estaria en ninguna lista
+		//no cambie nada todavia porque por ahi para actualizar los estaticos necesitamos ciertos datos, hay que ver como lo resolvemos
 	}
 
 	public Banda(String solista, String genero, Date fecha, int integrantes) {
@@ -47,6 +58,7 @@ public class Banda {
 	}
 
 	// ANALIZADORES
+
 	public String getSolista() {
 		return solista;
 	}
@@ -100,6 +112,7 @@ public class Banda {
 	}
 
 	// MODIFICADORES
+
 	public void setSolista(String solista) {
 		this.solista = solista;
 	}
@@ -154,6 +167,7 @@ public class Banda {
 		arbol.ingresarNodo(new NodoArbol(this));
 		generos.add(this.genero);
 		barrios.add(this.barrio);
+		agregarABandas(this);
 	}
 
 	public static int contarBandasPorBarrio(String barrio) {
@@ -168,10 +182,45 @@ public class Banda {
 		return n;
 	}
 
-	// Con esto se imprimiria toda la tabla en lugar de solo el solista, para el punto 4. Falta corregir la impresion de las matrices
+	private void agregarABandas(Banda banda){
+		boolean isKeyInMap = false;
+		String genero = banda.genero.toLowerCase().trim();
+		String[] datos = {banda.solista, banda.barrio, Integer.toString(banda.integrantes)};
+
+		for (String key : bandas.keySet()){
+			if (genero.equals(key)) {
+				isKeyInMap = true;
+				break;
+			}
+		}
+		if (isKeyInMap){
+			bandas.get(genero).add(datos);
+		} else {
+			bandas.put(genero, new ListaSimpleCadenas(new NodoCadenas(datos)));
+		}
+	}
+
+	//TODO: Con esto se imprimiria toda la tabla en lugar de solo el solista, para el punto 4. Falta corregir la impresion de las matrices
+	//UPDATE: arregle la impresion de las matrices, no mire que pide el punto 4 pero cuando se imprime estaria bueno dar un poco mas de informacion
+	//sobre que esta imprimiendo
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 		return String.format("%s %s %s %s %s %s %s %s %s %s %s %d", solista, genero, estilo, sdf.format(fecha), fb, tw,
-				redes.toString(), discos.toString(), videoclip.toString(), video.toString(), barrio, integrantes);
+				arrayToString(redes), arrayToString(discos), arrayToString(videoclip), arrayToString(video), barrio, integrantes);
 	}
+
+	private String arrayToString(String[] stringArray){
+		String string = "[";
+		for (String s : stringArray){
+			if (s.equals(stringArray[0])){
+				string += s.trim();
+			} else {
+				string += ", " + s.trim();
+			}
+		}
+		string += "]";
+
+		return string;
+	}
+
 }

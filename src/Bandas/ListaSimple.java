@@ -56,11 +56,7 @@ public class ListaSimple {
     }
 
     public boolean isEmpty() {
-        if (inicio == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return inicio == null;
     }
 
 }
