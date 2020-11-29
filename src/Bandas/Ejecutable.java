@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.io.*;
 
 public class Ejecutable {
-
+	
 	public static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -29,6 +29,8 @@ public class Ejecutable {
                 case 3:
                     break;
                 case 4:
+                	//ya esta hecho el arbol, habria que ver como lo instanciamos en esta clase ejecutable
+                	//arbol.inorden(raiz);
                     break;
                 case 5:
                     break;
@@ -94,7 +96,7 @@ public class Ejecutable {
     }
 
     public static void readCSV() {
-        String path = "./bandas-inscriptas.csv";
+        String path = "C:\\Users\\54115\\Documents\\Ramiro\\Programacion\\dataset\\bandas-inscriptas.csv";
         String line = "";
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
@@ -105,15 +107,15 @@ public class Ejecutable {
                 if (isHeaders){
                     isHeaders = false;
                 } else {
-                    //TODO: separar discos o cualquier campo que tenga mas de uno. Posiblemente usar listas para esos campos.
                     Banda banda = new Banda(values[0], values[1], values[2], parseDate(values[3]),
-						values[4], values[5], values[6], values[7],
-						values[8], values[9], values[10], Integer.parseInt(values[11]));
+						values[4], values[5], values[6].split(","), values[7].split(","),
+						values[8].split(","), values[9].split(","), values[10], Integer.parseInt(values[11]));
                 }
             }
         } catch (IOException | ParseException e) {
             print(e.getMessage());
         }
+
 	}
 
     public static void print(Object x){
@@ -124,6 +126,5 @@ public class Ejecutable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         return dateFormat.parse(date);
     }
-
 
 }
