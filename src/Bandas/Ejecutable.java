@@ -18,35 +18,44 @@ public class Ejecutable {
 
         do {
             switch (menu()) {
-                case 0:
-                    menu();
-                    break;
                 case 1:
-                    // visualizarBandas();
+                    visualizarBandas();
+                    presionarEnter();
                     break;
                 case 2:
+                    presionarEnter();
                     break;
                 case 3:
+                    presionarEnter();
                     break;
                 case 4:
-                	//ya esta hecho el arbol, habria que ver como lo instanciamos en esta clase ejecutable
-                	//arbol.inorden(raiz);
+                    // TODO: aca no se si me pide solo el solista, o toda la info de cada banda. Si
+                    // pide toda la banda, hay que corregir el metodo toString() de Banda y meterlo
+                    // en inorden.
+                    Banda.arbol.inorden();
+                    presionarEnter();
                     break;
                 case 5:
+                    presionarEnter();
                     break;
                 case 6:
+                    presionarEnter();
                     break;
                 case 7:
+                    presionarEnter();
                     break;
                 case 8:
+                    presionarEnter();
                     break;
                 case 9:
+                    presionarEnter();
                     break;
                 case 10:
+                    presionarEnter();
                     break;
                 case 11:
                     deseaSalir = true;
-                    println("Saliendo del programa.");
+                    println("Saliendo del programa.\n");
                     break;
                 default:
                     println("Por favor ingrese un numero entre 1 y 11.");
@@ -59,12 +68,19 @@ public class Ejecutable {
             try {  
                 print(frase);
                 int in = scanner.nextInt();
+                scanner.nextLine();
                 return in;
             } catch (InputMismatchException | NumberFormatException e) {
                 println("El numero ingresado no es valido. Intentelo nuevamente.\n");
                 scanner.next();
             }
         }
+    }
+
+    public static String pedirString(String frase) {
+        print(frase);
+        String string = scanner.nextLine();
+        return string;
     }
 
     public static int menu() {
@@ -102,6 +118,7 @@ public class Ejecutable {
         while (true) {
             try {
                 procesarCSV(path);
+                break;
             } catch (IOException e) {
                 printf("\nNo se pudo encontrar el archivo \"%s\" en el directorio:\n\t%s\nPor favor coloque el archivo en ese directorio.\n\n",
                         file, localDir);
@@ -114,11 +131,12 @@ public class Ejecutable {
             } catch (ParseException e) {
                 // Esto significa que hubo un error parseando la fecha de la columna 4 del csv. Con este csv nunca pasaria.
                 e.printStackTrace();
+                break;
             }
         }
     }
 
-    private static void procesarCSV(String path) throws IOException, ParseException {
+    public static void procesarCSV(String path) throws IOException, ParseException {
         String line;
         BufferedReader br = new BufferedReader(new FileReader(path));
         boolean isHeaders = true;
@@ -128,14 +146,32 @@ public class Ejecutable {
             if (isHeaders) {
                 isHeaders = false;
             } else {
-                // TODO: procesar la informacion del csv
-                Banda banda = new Banda(values[0], values[1], values[2], parseDate(values[3]), values[4], values[5],
+                new Banda(values[0], values[1], values[2], parseDate(values[3]), values[4], values[5],
                         values[6].split(","), values[7].split(","), values[8].split(","), values[9].split(","),
                         values[10], Integer.parseInt(values[11]));
             }
         }
 
         br.close();
+    }
+
+    public static void visualizarBandas() {
+        String barrio = pedirString("Ingrese un barrio para visualizar su cantidad de bandas: ").toUpperCase().trim();
+        if (!Banda.barrios.contains(barrio)) {
+            printf("El barrio ingresado %s no existe.\n", barrio);
+            return;
+        }
+        int n = Banda.contarBandasPorBarrio(barrio);
+        printf("En el barrio de %s hay %d bandas.\n", barrio, n);
+    }
+
+    public static void presionarEnter() { 
+           print("\nPresione ENTER para continuar...");
+           try {
+               scanner.nextLine();
+           }  
+           catch(Exception e)
+           {}  
     }
 
     public static void println(Object x) {

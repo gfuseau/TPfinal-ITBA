@@ -1,6 +1,9 @@
 package Bandas;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Banda {
 	private String solista, genero, estilo, fb, tw, barrio;
@@ -9,8 +12,10 @@ public class Banda {
 	private Date fecha;
 
 	static ListaSimple lista = new ListaSimple();
-	Arbol arbol = new Arbol();
-	
+	static Arbol arbol = new Arbol();
+	static Set<String> generos = new HashSet<String>();
+	static Set<String> barrios = new HashSet<String>();
+
 	// CONSTRUCTORES
 
 	public Banda() {
@@ -21,9 +26,7 @@ public class Banda {
 		this.genero = genero;
 		this.fecha = fecha;
 		this.integrantes = integrantes;
-		lista.add(this);
-		NodoArbol nodo = new NodoArbol(this);
-		arbol.ingresarNodo(nodo);
+		actualizarEstaticos();
 	}
 
 	public Banda(String solista, String genero, String estilo, Date fecha, String fb, String tw, String[] redes,
@@ -34,20 +37,13 @@ public class Banda {
 		this.fecha = fecha;
 		this.fb = fb;
 		this.tw = tw;
-		// aca en redes hay algunos que tienen mas de 1 esta separados los link por una
-		// coma
 		this.redes = redes;
-		// lo mismo para discos
 		this.discos = discos;
-		// videoclip tambien
 		this.videoclip = videoclip;
-		// video tambien
 		this.video = video;
 		this.barrio = barrio;
 		this.integrantes = integrantes;
-		lista.add(this);
-		NodoArbol nodo = new NodoArbol(this);
-		arbol.ingresarNodo(nodo);
+		actualizarEstaticos();
 	}
 
 	// ANALIZADORES
@@ -152,4 +148,30 @@ public class Banda {
 		this.integrantes = integrantes;
 	}
 
+	// Otros metodos
+	private void actualizarEstaticos() {
+		lista.add(this);
+		arbol.ingresarNodo(new NodoArbol(this));
+		generos.add(this.genero);
+		barrios.add(this.barrio);
+	}
+
+	public static int contarBandasPorBarrio(String barrio) {
+		int n = 0;
+		Nodo currentNodo = lista.getInicio();
+		while (currentNodo != null) {
+			if (barrio.equals(currentNodo.getBanda().getBarrio())) {
+				n++;
+			}
+			currentNodo = currentNodo.getSiguiente();
+		}
+		return n;
+	}
+
+	// Con esto se imprimiria toda la tabla en lugar de solo el solista, para el punto 4. Falta corregir la impresion de las matrices
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+		return String.format("%s %s %s %s %s %s %s %s %s %s %s %d", solista, genero, estilo, sdf.format(fecha), fb, tw,
+				redes.toString(), discos.toString(), videoclip.toString(), video.toString(), barrio, integrantes);
+	}
 }
