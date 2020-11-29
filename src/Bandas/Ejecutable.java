@@ -207,7 +207,7 @@ public class Ejecutable {
     }
 
     public static void presionarEnter() { 
-           print("\nPresione ENTER para continuar...");
+           print("\nPresione ENTER para continuar...\n");
            try {
                scanner.nextLine();
            }  
