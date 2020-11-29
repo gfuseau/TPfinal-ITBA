@@ -37,6 +37,7 @@ public class Ejecutable {
                     3. Visualizar para cada barrio según el genero musical mas tocado por las bandas, la
                     personalidad que prevalece según los estudios mostrados anteriormente.
                      */
+                    personalidadPorBarrio(musicaPersonalidad);
                     presionarEnter();
                     break;
                 case 4:
@@ -88,6 +89,7 @@ public class Ejecutable {
                     /*
                     10. Mostar en cada barrio cual es el género de música que las bandas tocan más.
                      */
+                    Banda.lista.printGeneroPorBarrio();
                     presionarEnter();
                     break;
                 case 11:
@@ -132,9 +134,9 @@ public class Ejecutable {
                 + "[7]  Crear una estructura a su eleccion que permita almacenar y mostrar la cantidad de bandas, discos y la cantidad de integrantes por genero musical.\n"
                 + "[8]  Visualizar el promedio de integrantes por Genero musical."
                 + "[9]  Visualizar las 10 primeras bandas con mas presencia en las redes sociales.\n"
-                + "[10] Mostar en cada barrio cual es el genero de musica que las bandas tocan mas.\n"
+                + "[10] Mostrar en cada barrio cual es el genero de musica que las bandas tocan mas.\n"
                 + "[11] Salir.");
-        print("\n------------------------------------------------------------\n");
+        print("\n------------------------------------------------------------");
 
         return pedirInt("");
     }
@@ -241,6 +243,38 @@ public class Ejecutable {
         musicaPersonalidad.put("rock", new String[] {"Baja autoestima", "Creativos", "Amables", "Poco trabajadores", "Introvertidos"});
         musicaPersonalidad.put("metal", new String[] {"Baja autoestima", "Creativos", "Amables", "Poco trabajadores", "Introvertidos"});
         return musicaPersonalidad;
+    }
+
+    public static void personalidadPorBarrio(HashMap<String, String[]> musicaPersonalidad){
+        HashMap<String, String> generoPorBarrio = Banda.lista.generoPorBarrio();
+        String genero;
+        String string = "La personalidad que prevalece en cada barrio es:";
+
+        for(String barrio : generoPorBarrio.keySet()){
+            genero = generoPorBarrio.get(barrio);
+            for(String key : musicaPersonalidad.keySet()){
+                if (genero.contains(key)){
+                    string += "\n- " + barrio + " (" + genero + "): " + arrayToString(musicaPersonalidad.get(key));
+                }
+            }
+        }
+
+        print(string);
+    }
+
+    public static String arrayToString(String[] array){
+        String s = "";
+
+        for (int i = 0; i < array.length; i++){
+            if (i == 0){
+                s += array[i];
+            } else {
+                s += ", " + array[i];
+            }
+        }
+
+        return s;
+
     }
 
 }
