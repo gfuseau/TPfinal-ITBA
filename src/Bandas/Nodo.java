@@ -1,19 +1,20 @@
 package Bandas;
 
 public class Nodo {
-	private Banda banda;
+    private Banda banda;
     private Nodo siguiente;
 
-    //Constructores
+    // Constructores
 
-    public Nodo(){}
+    public Nodo() {
+    }
 
-    public Nodo(Banda banda){
+    public Nodo(Banda banda) {
         this.banda = banda;
         this.siguiente = null;
     }
 
-    //Setters
+    // Setters
 
     public void setBanda(Banda banda) {
         this.banda = banda;
@@ -23,7 +24,7 @@ public class Nodo {
         this.siguiente = siguiente;
     }
 
-    //Getters
+    // Getters
 
     public Banda getBanda() {
         return banda;

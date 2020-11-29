@@ -1,37 +1,38 @@
 package Bandas;
 
 public class ListaSimple {
-	private Nodo inicio;
+    private Nodo inicio;
 
-    //CONSTRUCTORES
+    // CONSTRUCTORES
 
-    public ListaSimple(){}
+    public ListaSimple() {
+    }
 
-    public ListaSimple(Nodo inicio){
+    public ListaSimple(Nodo inicio) {
         this.inicio = inicio;
     }
 
-    //SETTERS
+    // SETTERS
 
     public void setInicio(Nodo inicio) {
         this.inicio = inicio;
     }
 
-    //GETTERS
+    // GETTERS
 
-    public Nodo getInicio(){
+    public Nodo getInicio() {
         return this.inicio;
     }
 
-    //OTROS
+    // OTROS
 
-    public void add(Banda banda){
+    public void add(Banda banda) {
         Nodo n1 = new Nodo(banda);
-        if (inicio == null){
+        if (inicio == null) {
             inicio = n1;
         } else {
             Nodo current = inicio;
-            while (current.getSiguiente() != null){
+            while (current.getSiguiente() != null) {
                 current = current.getSiguiente();
             }
             current.setSiguiente(n1);
@@ -39,7 +40,7 @@ public class ListaSimple {
 
     }
 
-    public int size(){
+    public int size() {
         int size = 0;
         if (inicio == null) {
             return 0;
@@ -55,7 +56,7 @@ public class ListaSimple {
     }
 
     public boolean isEmpty() {
-        if (inicio == null){
+        if (inicio == null) {
             return true;
         } else {
             return false;

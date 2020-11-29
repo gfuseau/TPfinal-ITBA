@@ -1,6 +1,5 @@
 package Bandas;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Banda {
@@ -11,9 +10,11 @@ public class Banda {
 
 	static ListaSimple lista = new ListaSimple();
 	Arbol arbol = new Arbol();
+	
 	// CONSTRUCTORES
 
-	public Banda(){}
+	public Banda() {
+	}
 
 	public Banda(String solista, String genero, Date fecha, int integrantes) {
 		this.solista = solista;
@@ -98,7 +99,9 @@ public class Banda {
 		return integrantes;
 	}
 
-	public ListaSimple getLista(){return lista;}
+	public ListaSimple getLista() {
+		return lista;
+	}
 
 	// MODIFICADORES
 	public void setSolista(String solista) {
