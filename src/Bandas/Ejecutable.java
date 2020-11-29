@@ -27,34 +27,67 @@ public class Ejecutable {
                     presionarEnter();
                     break;
                 case 2:
+                    /*
+                    2. Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relación con el total.
+                     */
                     presionarEnter();
                     break;
                 case 3:
+                    /*
+                    3. Visualizar para cada barrio según el genero musical mas tocado por las bandas, la
+                    personalidad que prevalece según los estudios mostrados anteriormente.
+                     */
                     presionarEnter();
                     break;
                 case 4:
+                    /*
+                    4. Visualizar la información de las bandas almacenadas en el árbol usando Recorrido InOrden.
+                     */
                     // TODO: aca no se si me pide solo el solista, o toda la info de cada banda. Si
                     // pide toda la banda, hay que corregir el metodo toString() de Banda y meterlo
                     // en inorden.
+                    //UPDATE: el metodo toString de la banda ya lo arregle, faltaria solo ponerle un formato que diga que es cada valor impreso
                     Banda.arbol.inorden();
                     presionarEnter();
                     break;
                 case 5:
+                    /*
+                    5. Visualizar la cantidad de Bandas por Barrio: ordenada por cantidad de bandas, usando el
+                    Conjunto de barrios y el Map llamado bandas.
+                     */
+
                     presionarEnter();
                     break;
                 case 6:
+                    /*
+                    6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabéticamente.
+                     */
+
                     presionarEnter();
                     break;
                 case 7:
+                    /*
+                    7. Crear una estructura a su elección que permita almacenar y mostrar la cantidad de bandas,
+                    discos y la cantidad de integrantes por género musical.
+                     */
                     presionarEnter();
                     break;
                 case 8:
+                    /*
+                    8. Visualizar el Promedio de integrantes por Género musical.
+                     */
                     presionarEnter();
                     break;
                 case 9:
+                    /*
+                    9. Visualizar las 10 primeras bandas con mas presencia en las redes sociales.
+                     */
                     presionarEnter();
                     break;
                 case 10:
+                    /*
+                    10. Mostar en cada barrio cual es el género de música que las bandas tocan más.
+                     */
                     presionarEnter();
                     break;
                 case 11:
