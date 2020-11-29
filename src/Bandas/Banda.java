@@ -1,5 +1,6 @@
 package Bandas;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,15 +19,27 @@ public class Banda {
 	static Set<String> generos = new HashSet<String>();
 	static Set<String> barrios = new HashSet<String>();
 	static HashMap<String, ListaSimpleCadenas> bandas = new HashMap<>();
+	static int cant = 0;
+	static int total = 0;
+	static double punto2;
+	Date date1 = null;
+	{
+		try {
+			date1 = Ejecutable.parseDate("31/12/10");
+		}
+		catch(ParseException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/*
-	Crear un Map llamado bandas que tenga como clave el gÃ©nero de mÃºsica tocado por las
+	Crear un Map llamado bandas que tenga como clave el género de música tocado por las
 bandas y como valor el nombre del solista de cada banda, barrio y la cantidad de
 integrantes
 	 */
 
 	// CONSTRUCTORES
-
+	
 	public Banda() {
 		//TODO: aca habria que actualizar los estaticos tambien. Tenemos un problema si creamos la banda con este constructor porque nunca estaria en ninguna lista
 		//no cambie nada todavia porque por ahi para actualizar los estaticos necesitamos ciertos datos, hay que ver como lo resolvemos
@@ -168,6 +181,11 @@ integrantes
 		generos.add(this.genero);
 		barrios.add(this.barrio);
 		agregarABandas(this);
+		total++;
+		if(date1.compareTo(this.fecha)>0) {
+			cant++;
+		}
+		punto2 = (100.0*cant)/(1.0*total);
 	}
 
 	public static int contarBandasPorBarrio(String barrio) {

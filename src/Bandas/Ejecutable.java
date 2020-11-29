@@ -28,21 +28,22 @@ public class Ejecutable {
                     break;
                 case 2:
                     /*
-                    2. Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relaciÃ³n con el total.
+                    2. Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relación con el total.
                      */
-                    presionarEnter();
+                    System.out.print("Un " + Banda.punto2 + "% de las bandas se inscribieron antes del 31/12/10");
+                	presionarEnter();
                     break;
                 case 3:
                     /*
-                    3. Visualizar para cada barrio segÃºn el genero musical mas tocado por las bandas, la
-                    personalidad que prevalece segÃºn los estudios mostrados anteriormente.
+                    3. Visualizar para cada barrio según el genero musical mas tocado por las bandas, la
+                    personalidad que prevalece según los estudios mostrados anteriormente.
                      */
                     personalidadPorBarrio(musicaPersonalidad);
                     presionarEnter();
                     break;
                 case 4:
                     /*
-                    4. Visualizar la informaciÃ³n de las bandas almacenadas en el Ã¡rbol usando Recorrido InOrden.
+                    4. Visualizar la información de las bandas almacenadas en el árbol usando Recorrido InOrden.
                      */
                     // TODO: aca no se si me pide solo el solista, o toda la info de cada banda. Si
                     // pide toda la banda, hay que corregir el metodo toString() de Banda y meterlo
@@ -61,21 +62,21 @@ public class Ejecutable {
                     break;
                 case 6:
                     /*
-                    6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabÃ©ticamente.
+                    6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabéticamente.
                      */
 
                     presionarEnter();
                     break;
                 case 7:
                     /*
-                    7. Crear una estructura a su elecciÃ³n que permita almacenar y mostrar la cantidad de bandas,
-                    discos y la cantidad de integrantes por gÃ©nero musical.
+                    7. Crear una estructura a su elección que permita almacenar y mostrar la cantidad de bandas,
+                    discos y la cantidad de integrantes por género musical.
                      */
                     presionarEnter();
                     break;
                 case 8:
                     /*
-                    8. Visualizar el Promedio de integrantes por GÃ©nero musical.
+                    8. Visualizar el Promedio de integrantes por Género musical.
                      */
                     presionarEnter();
                     break;
@@ -87,7 +88,7 @@ public class Ejecutable {
                     break;
                 case 10:
                     /*
-                    10. Mostar en cada barrio cual es el gÃ©nero de mÃºsica que las bandas tocan mÃ¡s.
+                    10. Mostar en cada barrio cual es el género de música que las bandas tocan más.
                      */
                     Banda.lista.printGeneroPorBarrio();
                     presionarEnter();
