@@ -17,7 +17,6 @@ public class Ejecutable {
 		generarTitulo();
 		leerCSV();
         HashMap<String, String[]> musicaPersonalidad = iniciarMusicaPersonalidad();
-        pruebaPunto9(); // Borrar cuando el punto 9 este chequeado
 
         boolean deseaSalir = false;
         do {
@@ -246,16 +245,18 @@ public class Ejecutable {
         String genero;
         String string = "La personalidad que prevalece en cada barrio es:";
 
+        GeneradorDeTablas tabla = new GeneradorDeTablas(2, "BARRIO (GENERO)", "PERSONALIDAD");
         for (String barrio : generoPorBarrio.keySet()) {
             genero = generoPorBarrio.get(barrio);
             for (String key : musicaPersonalidad.keySet()) {
                 if (genero.contains(key)) {
-                    string += "\n- " + barrio + " (" + genero + "): " + arrayToString(musicaPersonalidad.get(key));
+                    // string += "\n- " + barrio + " (" + genero + "): " + arrayToString(musicaPersonalidad.get(key));
+                    tabla.anadirFila(barrio + " (" + genero + ")", arrayToString(musicaPersonalidad.get(key)));
                 }
             }
         }
-
-        print(string);
+        // print(string);
+        tabla.imprimirTabla();
     }
 
     public static String arrayToString(String[] array) {
@@ -271,16 +272,6 @@ public class Ejecutable {
 
         return s;
 
-    }
-
-    // TODO: Borrar cuando el punto 9 este chequeado
-    public static void pruebaPunto9() {
-        Banda b = Banda.lista.getInicio().getSiguiente().getSiguiente().getBanda();
-        System.out.println(b.getSolista());
-        System.out.println(b.getFb());
-        System.out.println(arrayToString(b.getRedes()));
-        System.out.println(b.getRedes().length);
-        if (b.getFb().equals("")) print(true); else print(false);
     }
 
     public static void promedioIntegrantesGenero(){
@@ -303,12 +294,15 @@ public class Ejecutable {
 
         String s = "Promedio de Integrantes por genero:\n";
 
+        GeneradorDeTablas tabla = new GeneradorDeTablas(2, "GENERO", "PROMEDIO");
         for (String key : integrantesPorGenero.keySet()){
             currentValues = integrantesPorGenero.get(key);
-            s += "- " + key + ": " + Double.toString((double) (currentValues[0] * 100 / currentValues[1]) / 100) + "\n";
+            // s += "- " + key + ": " + Double.toString((double) (currentValues[0] * 100 / currentValues[1]) / 100) + "\n";
+            String promedio = String.format("%.2f", (currentValues[0] * 100.0 / currentValues[1]) / 100.0);
+            tabla.anadirFila(key, promedio);
         }
-
-        print(s);
+        tabla.imprimirTabla();
+        // print(s);
 
     }
 
@@ -318,13 +312,12 @@ public class Ejecutable {
             BandasPorBarrio.put(barrio.toLowerCase(), 0);
         }
 
-        Banda current;
-        HashMap<String, ListaSimpleCadenas> banda = Banda.bandas;
+        HashMap<String, ListaSimpleCadenas> mapDeBandas = Banda.bandas;
         int currentValue = 0;
 
         for (String barrio : BandasPorBarrio.keySet()) { // por barrio
             currentValue = BandasPorBarrio.get(barrio);
-            for (ListaSimpleCadenas lista : banda.values()) { // cada una de las listas para cada genero
+            for (ListaSimpleCadenas lista : mapDeBandas.values()) { // cada una de las listas para cada genero
                 NodoCadenas currentNodoCadenas = lista.getInicio();
                 while (currentNodoCadenas != null) { // cada uno de los nodos de cada lista.
                     if (barrio.equals(currentNodoCadenas.getBarrio().toLowerCase())) {
@@ -354,4 +347,5 @@ public class Ejecutable {
         }
         // aca ya estaria el map BandasPorBarrio ordenado alfabeticamente.
     }
+
 }

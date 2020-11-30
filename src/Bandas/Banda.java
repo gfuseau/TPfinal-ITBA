@@ -270,13 +270,20 @@ public class Banda {
 
         Collections.sort(listaOrdenadaPorPresencia, Comparator.comparing(Banda::getPresenciaEnRedes));
         int size = listaOrdenadaPorPresencia.size();
-        for (int i = size - 1; i > size - 1 - N; i--) {
+
+        /* for (int i = size - 1; i > size - 1 - N; i--) {
             String solista = listaOrdenadaPorPresencia.get(i).getSolista();
             int presenciaEnRedes = listaOrdenadaPorPresencia.get(i).getPresenciaEnRedes();
             System.out.printf("[%d]\t%-36s\t%d\n", size - i, solista, presenciaEnRedes);
+        } */
+
+        GeneradorDeTablas tabla = new GeneradorDeTablas(3, "POS", "SOLISTA", "CANTIDAD DE REDES");
+        for (int i = size - 1; i > size - 1 - N; i--) {
+            String solista = listaOrdenadaPorPresencia.get(i).getSolista();
+            int presenciaEnRedes = listaOrdenadaPorPresencia.get(i).getPresenciaEnRedes();
+            tabla.anadirFila(size - i, solista, presenciaEnRedes);
         }
-        System.out.println("-----------------------------------------------------------------------------------");
-        System.out.printf("POS\t%-36s\t%s\n", "SOLISTA", "REDES");
+        tabla.imprimirTabla();
     }
 
 }
