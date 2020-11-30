@@ -45,10 +45,6 @@ public class Ejecutable {
                     /*
                     4. Visualizar la informacion de las bandas almacenadas en el arbol usando Recorrido InOrden.
                      */
-                    // TODO: aca no se si me pide solo el solista, o toda la info de cada banda. Si
-                    // pide toda la banda, hay que corregir el metodo toString() de Banda y meterlo
-                    // en inorden.
-                    // UPDATE: el metodo toString de la banda ya lo arregle, faltaria solo ponerle un formato que diga que es cada valor impreso
                     Banda.arbol.inorden();
                     presionarEnter();
                     break;
@@ -186,13 +182,17 @@ public class Ejecutable {
             if (isHeaders) {
                 isHeaders = false;
             } else {
+                for (int i = 0; i < values.length; i++) {
+                    values[i] = values[i].trim();
+                }
                 new Banda(values[0], values[1], values[2], parseDate(values[3]), values[4], values[5],
                         values[6].split(","), values[7].split(","), values[8].split(","), values[9].split(","),
                         values[10], Integer.parseInt(values[11]));
             }
         }
 
-        //print(Banda.lista.getInicio().getBanda().toString()); SI QUIEREN  VER COMO QUEDO EL TOSTRING DE BANDA CORRAN EL PROGRAMA CON ESTA LINEA
+        // print(Banda.lista.getInicio().getBanda().toString()); SI QUIEREN VER COMO
+        // QUEDO EL TOSTRING DE BANDA CORRAN EL PROGRAMA CON ESTA LINEA
 
         br.close();
     }
@@ -207,16 +207,15 @@ public class Ejecutable {
         printf("En el barrio de %s hay %d bandas.\n", barrio, n);
     }
 
-    public static void presionarEnter() { 
-           print("\nPresione ENTER para continuar...\n");
-           try {
-               scanner.nextLine();
-           }  
-           catch(Exception e)
-           {}  
+    public static void presionarEnter() {
+        print("\nPresione ENTER para continuar...\n");
+        try {
+            scanner.nextLine();
+        } catch (Exception e) {
+        }
     }
 
-    public static void printf(String format, Object ... args) {
+    public static void printf(String format, Object... args) {
         System.out.printf(format, args);
     }
 
@@ -229,32 +228,32 @@ public class Ejecutable {
         return dateFormat.parse(date);
     }
 
-    public static HashMap<String, String[]> iniciarMusicaPersonalidad(){
+    public static HashMap<String, String[]> iniciarMusicaPersonalidad() {
         HashMap<String, String[]> musicaPersonalidad = new HashMap<>();
-        musicaPersonalidad.put("blues", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
-        musicaPersonalidad.put("jazz", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
-        musicaPersonalidad.put("soul", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
-        musicaPersonalidad.put("rap", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
-        musicaPersonalidad.put("opera", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos"});
-        musicaPersonalidad.put("clasica", new String[] {"Alta autoestima", "Creativos", "Amables", "Introvertidos"});
-        musicaPersonalidad.put("country", new String[] {"Trabajadores", "Extrovertidos"});
-        musicaPersonalidad.put("reggae", new String[] {"Alta autoestima", "Creativos", "Amables", "Extrovertidos", "Vagos"});
-        musicaPersonalidad.put("dance", new String[] {"Creativos", "Poco amables", "Extrovertidos"});
-        musicaPersonalidad.put("indie", new String[] {"Baja autoestima", "Creativos", "Poco amables", "Poco trabajadores"});
-        musicaPersonalidad.put("rock", new String[] {"Baja autoestima", "Creativos", "Amables", "Poco trabajadores", "Introvertidos"});
-        musicaPersonalidad.put("metal", new String[] {"Baja autoestima", "Creativos", "Amables", "Poco trabajadores", "Introvertidos"});
+        musicaPersonalidad.put("blues", new String[] { "Alta autoestima", "Creativos", "Amables", "Extrovertidos" });
+        musicaPersonalidad.put("jazz", new String[] { "Alta autoestima", "Creativos", "Amables", "Extrovertidos" });
+        musicaPersonalidad.put("soul", new String[] { "Alta autoestima", "Creativos", "Amables", "Extrovertidos" });
+        musicaPersonalidad.put("rap", new String[] { "Alta autoestima", "Creativos", "Amables", "Extrovertidos" });
+        musicaPersonalidad.put("opera", new String[] { "Alta autoestima", "Creativos", "Amables", "Extrovertidos" });
+        musicaPersonalidad.put("clasica", new String[] { "Alta autoestima", "Creativos", "Amables", "Introvertidos" });
+        musicaPersonalidad.put("country", new String[] { "Trabajadores", "Extrovertidos" });
+        musicaPersonalidad.put("reggae", new String[] { "Alta autoestima", "Creativos", "Amables", "Extrovertidos", "Vagos" });
+        musicaPersonalidad.put("dance", new String[] { "Creativos", "Poco amables", "Extrovertidos" });
+        musicaPersonalidad.put("indie", new String[] { "Baja autoestima", "Creativos", "Poco amables", "Poco trabajadores" });
+        musicaPersonalidad.put("rock", new String[] { "Baja autoestima", "Creativos", "Amables", "Poco trabajadores", "Introvertidos" });
+        musicaPersonalidad.put("metal", new String[] { "Baja autoestima", "Creativos", "Amables", "Poco trabajadores", "Introvertidos" });
         return musicaPersonalidad;
     }
 
-    public static void personalidadPorBarrio(HashMap<String, String[]> musicaPersonalidad){
+    public static void personalidadPorBarrio(HashMap<String, String[]> musicaPersonalidad) {
         HashMap<String, String> generoPorBarrio = Banda.lista.generoPorBarrio();
         String genero;
         String string = "La personalidad que prevalece en cada barrio es:";
 
-        for(String barrio : generoPorBarrio.keySet()){
+        for (String barrio : generoPorBarrio.keySet()) {
             genero = generoPorBarrio.get(barrio);
-            for(String key : musicaPersonalidad.keySet()){
-                if (genero.contains(key)){
+            for (String key : musicaPersonalidad.keySet()) {
+                if (genero.contains(key)) {
                     string += "\n- " + barrio + " (" + genero + "): " + arrayToString(musicaPersonalidad.get(key));
                 }
             }
@@ -263,11 +262,11 @@ public class Ejecutable {
         print(string);
     }
 
-    public static String arrayToString(String[] array){
+    public static String arrayToString(String[] array) {
         String s = "";
 
-        for (int i = 0; i < array.length; i++){
-            if (i == 0){
+        for (int i = 0; i < array.length; i++) {
+            if (i == 0) {
                 s += array[i];
             } else {
                 s += ", " + array[i];

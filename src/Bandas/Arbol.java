@@ -35,7 +35,7 @@ public class Arbol {
 
     private void preorden(NodoArbol nodo) {
         if (nodo != null) {
-            System.out.println(nodo.banda.getSolista());
+            System.out.println(nodo.banda.toStringNuncaEnBlanco());
             preorden(nodo.getIzquierdo());
             preorden(nodo.getDerecho());
         }
@@ -45,7 +45,7 @@ public class Arbol {
     private void inorden(NodoArbol nodo) {
         if (nodo != null) {
             inorden(nodo.getIzquierdo());
-            System.out.println(nodo.banda.getSolista());
+            System.out.println(nodo.banda.toStringNuncaEnBlanco());
             inorden(nodo.getDerecho());
         }
     }
@@ -54,20 +54,26 @@ public class Arbol {
         if (nodo != null) {
             postorden(nodo.getIzquierdo());
             postorden(nodo.getDerecho());
-            System.out.println(nodo.banda.getSolista());
+            System.out.println(nodo.banda.toStringNuncaEnBlanco());
         }
     }
 
     public void preorden() {
         preorden(raiz);
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.printf("%-36s\t%-16s\t%s\t%s", "SOLISTA", "GENERO", "FECHA", "INTEGRANTES\n");
     }
 
     public void inorden() {
         inorden(raiz);
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.printf("%-36s\t%-16s\t%s\t%s", "SOLISTA", "GENERO", "FECHA", "INTEGRANTES\n");
     }
 
     public void postorden() {
         postorden(raiz);
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.printf("%-36s\t%-16s\t%s\t%s", "SOLISTA", "GENERO", "FECHA", "INTEGRANTES\n");
     }
 
     private int altura(NodoArbol nodo) {

@@ -63,30 +63,30 @@ public class ListaSimple {
         return inicio == null;
     }
 
-    private HashMap<String, HashMap<String, Integer>> generosPorBarrio(){
+    private HashMap<String, HashMap<String, Integer>> generosPorBarrio() {
         Nodo current = this.inicio;
         HashMap<String, HashMap<String, Integer>> contador = new HashMap<>();
-        //barrio -> genero -> contador
+        // barrio -> genero -> contador
         boolean isBarrioInMap, isGeneroInMap;
         String currentBarrio, currentGenero;
         HashMap<String, Integer> generos;
 
-        if (current != null){
-            while (current.getSiguiente() != null){
+        if (current != null) {
+            while (current.getSiguiente() != null) {
 
                 isBarrioInMap = false;
                 isGeneroInMap = false;
                 currentBarrio = current.getBanda().getBarrio().trim().toLowerCase();
                 currentGenero = current.getBanda().getGenero().trim().toLowerCase();
 
-                for (String barrio : contador.keySet()){
-                    if (currentBarrio.equals(barrio)){
+                for (String barrio : contador.keySet()) {
+                    if (currentBarrio.equals(barrio)) {
 
                         isBarrioInMap = true;
                         generos = contador.get(currentBarrio);
 
-                        for (String genero : generos.keySet()){
-                            if(currentGenero.equals(genero)){
+                        for (String genero : generos.keySet()) {
+                            if (currentGenero.equals(genero)) {
 
                                 isGeneroInMap = true;
                                 generos.replace(currentGenero, generos.get(currentGenero) + 1);
@@ -97,8 +97,8 @@ public class ListaSimple {
                     }
                 }
 
-                if (!isBarrioInMap){
-                    HashMap<String,Integer> hashMap = new HashMap<>();
+                if (!isBarrioInMap) {
+                    HashMap<String, Integer> hashMap = new HashMap<>();
                     hashMap.put(currentGenero, 1);
                     contador.put(currentBarrio, hashMap);
                 } else if (!isGeneroInMap) {
@@ -112,21 +112,22 @@ public class ListaSimple {
         return contador;
     }
 
-    public HashMap<String, String> generoPorBarrio(){
-        //TODO: si hay varios generos con la misma cantiidad de bandas, solo da el primero. Se podria cambiar para que de todos.
+    public HashMap<String, String> generoPorBarrio() {
+        // TODO: si hay varios generos con la misma cantiidad de bandas, solo da el
+        // primero. Se podria cambiar para que de todos.
         HashMap<String, HashMap<String, Integer>> contador = generosPorBarrio();
         HashMap<String, String> generoPorBarrio = new HashMap<>();
         Set<String> generos;
         String string, maxGenero;
         int max, valor;
 
-        for (String barrio : contador.keySet()){
+        for (String barrio : contador.keySet()) {
 
             generos = contador.get(barrio).keySet();
             max = 0;
             maxGenero = "";
 
-            for (String genero : generos){
+            for (String genero : generos) {
                 valor = contador.get(barrio).get(genero);
                 if (valor > max) {
                     max = valor;
@@ -140,11 +141,11 @@ public class ListaSimple {
         return generoPorBarrio;
     }
 
-    public void printGeneroPorBarrio(){
+    public void printGeneroPorBarrio() {
         HashMap<String, String> generoPorBarrio = generoPorBarrio();
         String string = "El genero que mas bandas tocan por barrio es:";
 
-        for (String barrio : generoPorBarrio.keySet()){
+        for (String barrio : generoPorBarrio.keySet()) {
             string += "\n- " + barrio + ": " + generoPorBarrio.get(barrio);
         }
 

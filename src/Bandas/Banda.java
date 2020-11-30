@@ -22,10 +22,10 @@ public class Banda {
     static int cant = 0;
     static int total = 0;
     static double porcentajeBandas;
-    static Date date1;
+    static Date FECHA_A_COMPARAR;
     static {
         try {
-            date1 = Ejecutable.parseDate("31/12/10");
+            FECHA_A_COMPARAR = Ejecutable.parseDate("31/12/10");
         } catch(ParseException e) {
             e.printStackTrace();
         }
@@ -182,7 +182,7 @@ integrantes
         barrios.add(this.barrio);
         agregarABandas(this);
         total++;
-        if (date1.compareTo(this.fecha) > 0) {
+        if (FECHA_A_COMPARAR.compareTo(this.fecha) > 0) {
             cant++;
         }
         porcentajeBandas = (100.0 * cant) / (1.0 * total);
@@ -223,6 +223,11 @@ integrantes
         return String.format("%s %s %s %s %s %s %s %s %s %s %s %d", solista, genero, estilo, sdf.format(fecha), fb, tw,
                 arrayToString(redes), arrayToString(discos), arrayToString(videoclip), arrayToString(video), barrio,
                 integrantes);
+    }
+
+    public String toStringNuncaEnBlanco() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        return String.format("%-36s\t%-16s\t%s\t%d", solista, genero, sdf.format(fecha), integrantes);
     }
 
     private String arrayToString(String[] stringArray) {
