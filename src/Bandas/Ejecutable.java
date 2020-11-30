@@ -73,6 +73,7 @@ public class Ejecutable {
                     /*
                     8. Visualizar el Promedio de integrantes por Genero musical.
                      */
+                    promedioIntegrantesGenero();
                     presionarEnter();
                     break;
                 case 9:
@@ -279,6 +280,35 @@ public class Ejecutable {
         System.out.println(arrayToString(b.getRedes()));
         System.out.println(b.getRedes().length);
         if (b.getFb().equals("")) print(true); else print(false);
+    }
+
+    public static void promedioIntegrantesGenero(){
+        HashMap<String, Integer[]> integrantesPorGenero = new HashMap<>();
+        for (String genero : Banda.generos){
+            integrantesPorGenero.put(genero.toLowerCase(), new Integer[] {0,0});
+        }
+
+        Banda current;
+        ListaSimple lista = Banda.lista;
+        Integer[] currentValues;
+
+        for (int i = 0; i < lista.size(); i++){
+            current = lista.getAtPosition(i);
+            currentValues = integrantesPorGenero.get(current.getGenero().toLowerCase());
+            currentValues[0] += current.getIntegrantes();
+            currentValues[1] += 1;
+            integrantesPorGenero.replace(current.getGenero().toLowerCase(), currentValues);
+        }
+
+        String s = "Promedio de Integrantes por genero:\n";
+
+        for (String key : integrantesPorGenero.keySet()){
+            currentValues = integrantesPorGenero.get(key);
+            s += "- " + key + ": " + Double.toString((double) (currentValues[0] * 100 / currentValues[1]) / 100) + "\n";
+        }
+
+        print(s);
+
     }
 
 }

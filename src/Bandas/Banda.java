@@ -25,10 +25,13 @@ public class Banda {
     static Set<String> generos = new HashSet<String>();
     static Set<String> barrios = new HashSet<String>();
     static HashMap<String, ListaSimpleCadenas> bandas = new HashMap<>();
+    //TODO: tenemos muchos static, hay que ver cuales pueden sacarse
     static int cant = 0;
     static int total = 0;
     static double porcentajeBandas;
     static Date FECHA_A_COMPARAR;
+
+    //TODO: mirar si no se puede hacer sin usar static, mismo para la fecha a comparar
     static {
         try {
             FECHA_A_COMPARAR = Ejecutable.parseDate("31/12/10");
@@ -37,19 +40,9 @@ public class Banda {
         }
     }
 
-    /*
-    Crear un Map llamado bandas que tenga como clave el g�nero de m�sica tocado por las
-bandas y como valor el nombre del solista de cada banda, barrio y la cantidad de
-integrantes
-     */
-
     // CONSTRUCTORES
     
-    public Banda() {
-        //TODO: aca habria que actualizar los estaticos tambien. Tenemos un problema si creamos la banda con este constructor porque nunca estaria en ninguna lista
-        //no cambie nada todavia porque por ahi para actualizar los estaticos necesitamos ciertos datos, hay que ver como lo resolvemos
-        // UPDATE: Para mi no hace falta. El tema es que aca nunca usariamos este constructor. Esta por formalidad - no hace falta.
-    }
+    public Banda() {}
 
     public Banda(String solista, String genero, Date fecha, int integrantes) {
         this.solista = solista;

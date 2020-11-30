@@ -152,4 +152,14 @@ public class ListaSimple {
         System.out.println(string);
     }
 
+    public Banda getAtPosition(int i){
+        int j = 0;
+        Nodo current = inicio;
+        while (j != i){
+            current = current.getSiguiente();
+            j++;
+        }
+        return current.getBanda();
+    }
+
 }
