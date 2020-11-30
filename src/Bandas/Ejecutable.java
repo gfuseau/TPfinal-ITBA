@@ -15,11 +15,10 @@ public class Ejecutable {
     public static void main(String[] args) {
 		generarTitulo();
 		leerCSV();
-
         HashMap<String, String[]> musicaPersonalidad = iniciarMusicaPersonalidad();
+        pruebaPunto9(); // Borrar cuando el punto 9 este chequeado
 
         boolean deseaSalir = false;
-
         do {
             switch (menu()) {
                 case 1:
@@ -80,6 +79,7 @@ public class Ejecutable {
                     /*
                     9. Visualizar las 10 primeras bandas con mas presencia en las redes sociales.
                      */
+                    Banda.calcularPresenciaEnRedes();
                     presionarEnter();
                     break;
                 case 10:
@@ -129,7 +129,7 @@ public class Ejecutable {
                 + "[5]  Visualizar la cantidad de Bandas por Barrio: ordenada por cantidad de bandas, usando el Conjunto de barrios y el Map llamado bandas.\n"
                 + "[6]  Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabeticamente.\n"
                 + "[7]  Crear una estructura a su eleccion que permita almacenar y mostrar la cantidad de bandas, discos y la cantidad de integrantes por genero musical.\n"
-                + "[8]  Visualizar el promedio de integrantes por Genero musical."
+                + "[8]  Visualizar el promedio de integrantes por Genero musical.\n"
                 + "[9]  Visualizar las 10 primeras bandas con mas presencia en las redes sociales.\n"
                 + "[10] Mostrar en cada barrio cual es el genero de musica que las bandas tocan mas.\n"
                 + "[11] Salir.");
@@ -158,8 +158,6 @@ public class Ejecutable {
             } catch (IOException e) {
                 printf("\nNo se pudo encontrar el archivo \"%s\" en el directorio:\n\t%s\nPor favor coloque el archivo en ese directorio.\n\n",
                         file, localDir);
-
-                // Esto lo hice para que no joda con lo de "evitar que el programa salga en forma abrupta".
                 int deseaSalir = pedirInt("Ingrese 1 si ya coloco el archivo. De lo contrario, ingrese cualquier otro numero y el programa finalizara: ");
                 if (deseaSalir != 1) {
                     System.exit(0);
@@ -190,10 +188,6 @@ public class Ejecutable {
                         values[10], Integer.parseInt(values[11]));
             }
         }
-
-        // print(Banda.lista.getInicio().getBanda().toString()); SI QUIEREN VER COMO
-        // QUEDO EL TOSTRING DE BANDA CORRAN EL PROGRAMA CON ESTA LINEA
-
         br.close();
     }
 
@@ -275,6 +269,16 @@ public class Ejecutable {
 
         return s;
 
+    }
+
+    // TODO: Borrar cuando el punto 9 este chequeado
+    public static void pruebaPunto9() {
+        Banda b = Banda.lista.getInicio().getSiguiente().getSiguiente().getBanda();
+        System.out.println(b.getSolista());
+        System.out.println(b.getFb());
+        System.out.println(arrayToString(b.getRedes()));
+        System.out.println(b.getRedes().length);
+        if (b.getFb().equals("")) print(true); else print(false);
     }
 
 }

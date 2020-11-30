@@ -2,10 +2,15 @@ package Bandas;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
 
 
 public class Banda {
@@ -13,6 +18,7 @@ public class Banda {
     private String[] redes, discos, videoclip, video;
     private int integrantes;
     private Date fecha;
+    private int presenciaEnRedes; // para el punto 9.
 
     static ListaSimple lista = new ListaSimple();
     static Arbol arbol = new Arbol();
@@ -122,6 +128,10 @@ integrantes
 
     public ListaSimple getLista() {
         return lista;
+    }
+
+    public int getPresenciaEnRedes() {
+        return presenciaEnRedes;
     }
 
     // MODIFICADORES
@@ -242,6 +252,40 @@ integrantes
         string += "]";
 
         return string;
+    }
+
+    public static void calcularPresenciaEnRedes() {
+        int N = 10;
+        int presencia = 0;
+        List<Banda> listaOrdenadaPorPresencia = new ArrayList<>(total);
+        Nodo currentNodo = lista.getInicio();
+
+        while (currentNodo != null) {
+            Banda currentBanda = currentNodo.getBanda();
+            if (!currentBanda.getFb().equals("")) {
+                presencia++;
+            }
+            if (!currentBanda.getTw().equals("")) {
+                presencia++;
+            }
+            if (!currentBanda.getRedes()[0].equals("")) {
+                presencia += currentBanda.getRedes().length;
+            }
+            currentBanda.presenciaEnRedes = presencia;
+            presencia = 0;
+            listaOrdenadaPorPresencia.add(currentBanda);
+            currentNodo = currentNodo.getSiguiente();
+        }
+
+        Collections.sort(listaOrdenadaPorPresencia, Comparator.comparing(Banda::getPresenciaEnRedes));
+        int size = listaOrdenadaPorPresencia.size();
+        for (int i = size - 1; i > size - 1 - N; i--) {
+            String solista = listaOrdenadaPorPresencia.get(i).getSolista();
+            int presenciaEnRedes = listaOrdenadaPorPresencia.get(i).getPresenciaEnRedes();
+            System.out.printf("[%d]\t%-36s\t%d\n", size - i, solista, presenciaEnRedes);
+        }
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.printf("POS\t%-36s\t%s\n", "SOLISTA", "REDES");
     }
 
 }
