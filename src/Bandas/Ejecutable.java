@@ -52,7 +52,7 @@ public class Ejecutable {
                     5. Visualizar la cantidad de Bandas por Barrio: ordenada por cantidad de bandas, usando el
                     Conjunto de barrios y el Map llamado bandas.
                      */
-
+                	BandasPorBarrio();
                     presionarEnter();
                     break;
                 case 6:
@@ -311,4 +311,34 @@ public class Ejecutable {
 
     }
 
+    public static void BandasPorBarrio(){
+        HashMap<String, Integer> BandasPorBarrio = new HashMap<>();
+        for (String barrio : Banda.barrios){
+            BandasPorBarrio.put(barrio.toLowerCase(), 0);
+        }
+
+        Banda current;
+        HashMap<String, ListaSimpleCadenas> banda = Banda.bandas;
+        int currentValue=0;
+
+	    for (String barrio: BandasPorBarrio.keySet()) {
+        	for (ListaSimpleCadenas lista: banda.values()){
+	            currentValue = BandasPorBarrio.get(barrio);
+        		if(BandasPorBarrio.containsKey(lista.getInicio().getBarrio().toLowerCase())) {
+        			currentValue++;
+        		}
+        		BandasPorBarrio.replace(barrio, currentValue);
+	        }
+        	currentValue=0;
+	    }
+        String s = "Cantidad de bandas por barrio:\n";
+
+        for (String key : BandasPorBarrio.keySet()){
+            currentValue = BandasPorBarrio.get(key);
+            s += "- " + key + ": " + currentValue + "\n";
+        }
+
+        print(s);
+
+    }
 }
