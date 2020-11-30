@@ -118,7 +118,7 @@ public class ListaSimple {
         HashMap<String, HashMap<String, Integer>> contador = generosPorBarrio();
         HashMap<String, String> generoPorBarrio = new HashMap<>();
         Set<String> generos;
-        String string, maxGenero;
+        String maxGenero;
         int max, valor;
 
         for (String barrio : contador.keySet()) {
