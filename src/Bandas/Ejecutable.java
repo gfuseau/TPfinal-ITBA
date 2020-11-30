@@ -311,29 +311,33 @@ public class Ejecutable {
 
     }
 
-    public static void BandasPorBarrio(){
+    public static void BandasPorBarrio() {
         HashMap<String, Integer> BandasPorBarrio = new HashMap<>();
-        for (String barrio : Banda.barrios){
+        for (String barrio : Banda.barrios) {
             BandasPorBarrio.put(barrio.toLowerCase(), 0);
         }
 
         Banda current;
         HashMap<String, ListaSimpleCadenas> banda = Banda.bandas;
-        int currentValue=0;
+        int currentValue = 0;
 
-	    for (String barrio: BandasPorBarrio.keySet()) {
-        	for (ListaSimpleCadenas lista: banda.values()){
-	            currentValue = BandasPorBarrio.get(barrio);
-        		if(BandasPorBarrio.containsKey(lista.getInicio().getBarrio().toLowerCase())) {
-        			currentValue++;
-        		}
-        		BandasPorBarrio.replace(barrio, currentValue);
-	        }
-        	currentValue=0;
-	    }
+        for (String barrio : BandasPorBarrio.keySet()) { // por barrio
+            currentValue = BandasPorBarrio.get(barrio);
+            for (ListaSimpleCadenas lista : banda.values()) { // cada una de las listas para cada genero
+                NodoCadenas currentNodoCadenas = lista.getInicio();
+                while (currentNodoCadenas != null) { // cada uno de los nodos de cada lista.
+                    if (barrio.equals(currentNodoCadenas.getBarrio().toLowerCase())) {
+                        currentValue++;
+                    }
+                    currentNodoCadenas = currentNodoCadenas.getSiguiente();
+                }
+            }
+            BandasPorBarrio.replace(barrio, currentValue);
+            currentValue = 0;
+        }
         String s = "Cantidad de bandas por barrio:\n";
 
-        for (String key : BandasPorBarrio.keySet()){
+        for (String key : BandasPorBarrio.keySet()) {
             currentValue = BandasPorBarrio.get(key);
             s += "- " + key + ": " + currentValue + "\n";
         }
