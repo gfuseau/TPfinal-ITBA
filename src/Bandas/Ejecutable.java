@@ -28,27 +28,27 @@ public class Ejecutable {
                     break;
                 case 2:
                     /*
-                    2. Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relación con el total.
+                    2. Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relacion con el total.
                      */
-                    System.out.print("Un " + Banda.punto2 + "% de las bandas se inscribieron antes del 31/12/10");
+                    System.out.print("Un " + Banda.porcentajeBandas + "% de las bandas se inscribieron antes del 31/12/10");
                 	presionarEnter();
                     break;
                 case 3:
                     /*
-                    3. Visualizar para cada barrio según el genero musical mas tocado por las bandas, la
-                    personalidad que prevalece según los estudios mostrados anteriormente.
+                    3. Visualizar para cada barrio segun el genero musical mas tocado por las bandas, la
+                    personalidad que prevalece segun los estudios mostrados anteriormente.
                      */
                     personalidadPorBarrio(musicaPersonalidad);
                     presionarEnter();
                     break;
                 case 4:
                     /*
-                    4. Visualizar la información de las bandas almacenadas en el árbol usando Recorrido InOrden.
+                    4. Visualizar la informacion de las bandas almacenadas en el arbol usando Recorrido InOrden.
                      */
                     // TODO: aca no se si me pide solo el solista, o toda la info de cada banda. Si
                     // pide toda la banda, hay que corregir el metodo toString() de Banda y meterlo
                     // en inorden.
-                    //UPDATE: el metodo toString de la banda ya lo arregle, faltaria solo ponerle un formato que diga que es cada valor impreso
+                    // UPDATE: el metodo toString de la banda ya lo arregle, faltaria solo ponerle un formato que diga que es cada valor impreso
                     Banda.arbol.inorden();
                     presionarEnter();
                     break;
@@ -62,21 +62,21 @@ public class Ejecutable {
                     break;
                 case 6:
                     /*
-                    6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabéticamente.
+                    6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabeticamente.
                      */
 
                     presionarEnter();
                     break;
                 case 7:
                     /*
-                    7. Crear una estructura a su elección que permita almacenar y mostrar la cantidad de bandas,
-                    discos y la cantidad de integrantes por género musical.
+                    7. Crear una estructura a su eleccion que permita almacenar y mostrar la cantidad de bandas,
+                    discos y la cantidad de integrantes por genero musical.
                      */
                     presionarEnter();
                     break;
                 case 8:
                     /*
-                    8. Visualizar el Promedio de integrantes por Género musical.
+                    8. Visualizar el Promedio de integrantes por Genero musical.
                      */
                     presionarEnter();
                     break;
@@ -88,7 +88,7 @@ public class Ejecutable {
                     break;
                 case 10:
                     /*
-                    10. Mostar en cada barrio cual es el género de música que las bandas tocan más.
+                    10. Mostar en cada barrio cual es el genero de musica que las bandas tocan mas.
                      */
                     Banda.lista.printGeneroPorBarrio();
                     presionarEnter();

@@ -1,6 +1,5 @@
 package Bandas;
 
-import sun.print.PSStreamPrinterFactory;
 
 public class ListaSimpleCadenas {
     private NodoCadenas inicio;
