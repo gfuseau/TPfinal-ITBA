@@ -3,9 +3,10 @@ package Bandas;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.text.SimpleDateFormat;  
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.TreeMap;
 import java.io.*;
 
 public class Ejecutable {
@@ -59,7 +60,7 @@ public class Ejecutable {
                     /*
                     6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabeticamente.
                      */
-
+                    BandasPorBarrio6();
                     presionarEnter();
                     break;
                 case 7:
@@ -336,13 +337,21 @@ public class Ejecutable {
             currentValue = 0;
         }
         String s = "Cantidad de bandas por barrio:\n";
-
+        
+        // TODO: ordenar esto por cantidad de bandas.
         for (String key : BandasPorBarrio.keySet()) {
             currentValue = BandasPorBarrio.get(key);
             s += "- " + key + ": " + currentValue + "\n";
         }
 
         print(s);
+    }
 
+    public static void BandasPorBarrio6() {
+        TreeMap<String, Integer> BandasPorBarrio = new TreeMap<>();
+        for (String barrio : Banda.barrios) {
+            BandasPorBarrio.put(barrio.toLowerCase(), 0);
+        }
+        // aca ya estaria el map BandasPorBarrio ordenado alfabeticamente.
     }
 }
