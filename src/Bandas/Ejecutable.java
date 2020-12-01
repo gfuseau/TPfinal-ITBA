@@ -1,10 +1,18 @@
 package Bandas;
 
 import java.text.ParseException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
 import java.io.*;
-
+import java.util.Arrays;
+import java.util.Arrays;
+import java.util.*;
 public class Ejecutable {
 	
 	public static Scanner scanner = new Scanner(System.in);
@@ -50,9 +58,6 @@ public class Ejecutable {
                     /*
                     6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabeticamente.
                      */
-
-                    //TODO: no se puede implementar una funcion que sea ordenar alfabeticamente? cambiando el return de bandasporbarrio para que pueda ser
-                    //tomado por la nueva funcion
                     BandasPorBarrio6();
                     break;
                 case 7:
@@ -60,7 +65,6 @@ public class Ejecutable {
                     7. Crear una estructura a su eleccion que permita almacenar y mostrar la cantidad de bandas,
                     discos y la cantidad de integrantes por genero musical.
                      */
-                    datosPorGenero();
                     break;
                 case 8:
                     /*
@@ -301,6 +305,7 @@ public class Ejecutable {
 
     public static void BandasPorBarrio() {
         HashMap<String, Integer> BandasPorBarrio = new HashMap<>();
+        Set<Integer> Ordenado = new HashSet<>();
         for (String barrio : Banda.barrios) {
             BandasPorBarrio.put(barrio.toLowerCase(), 0);
         }
@@ -320,11 +325,53 @@ public class Ejecutable {
                 }
             }
             BandasPorBarrio.replace(barrio, currentValue);
+            Ordenado.add(currentValue);
             currentValue = 0;
         }
         String s = "Cantidad de bandas por barrio:\n";
         
-        // TODO: ordenar esto por cantidad de bandas.
+        int n=Ordenado.size();
+        int k=0;
+        int[] arr = new int[n];
+        for (int i: Ordenado) {
+        	arr[k]=i;
+        	k++;
+        }        
+        Arrays.sort(arr);
+        for (int i = n - 1; i >= 0; i--) {
+	        for (String key : BandasPorBarrio.keySet()) {
+	            currentValue = BandasPorBarrio.get(key);
+	            if(currentValue==arr[i]) {	
+	            	s += "- " + key + ": " + currentValue + "\n";
+	            }
+	        }
+        }
+        print(s);
+    }
+
+    public static void BandasPorBarrio6() {
+        TreeMap<String, Integer> BandasPorBarrio = new TreeMap<>();
+        String s = "Cantidad de bandas por barrio:\n";
+        for (String barrio : Banda.barrios) {
+            BandasPorBarrio.put(barrio.toLowerCase(), 0);
+        }
+        // aca ya estaria el map BandasPorBarrio ordenado alfabeticamente.
+        HashMap<String, ListaSimpleCadenas> mapDeBandas = Banda.bandas;
+        int currentValue = 0;
+        for (String barrio : BandasPorBarrio.keySet()) { // por barrio
+            currentValue = BandasPorBarrio.get(barrio);
+            for (ListaSimpleCadenas lista : mapDeBandas.values()) { // cada una de las listas para cada genero
+                NodoCadenas currentNodoCadenas = lista.getInicio();
+                while (currentNodoCadenas != null) { // cada uno de los nodos de cada lista.
+                    if (barrio.equals(currentNodoCadenas.getBarrio().toLowerCase())) {
+                        currentValue++;
+                    }
+                    currentNodoCadenas = currentNodoCadenas.getSiguiente();
+                }
+            }
+            BandasPorBarrio.replace(barrio, currentValue);
+            currentValue = 0;
+        }
         for (String key : BandasPorBarrio.keySet()) {
             currentValue = BandasPorBarrio.get(key);
             s += "- " + key + ": " + currentValue + "\n";
@@ -333,66 +380,4 @@ public class Ejecutable {
         print(s);
     }
 
-    public static void BandasPorBarrio6() {
-        TreeMap<String, Integer> BandasPorBarrio = new TreeMap<>();
-        for (String barrio : Banda.barrios) {
-            BandasPorBarrio.put(barrio.toLowerCase(), 0);
-        }
-        // aca ya estaria el map BandasPorBarrio ordenado alfabeticamente.
-    }
-
-    public static void datosPorGenero(){
-             /*
-                    7. Crear una estructura a su eleccion que permita almacenar y mostrar la cantidad de bandas,
-                    discos y la cantidad de integrantes por genero musical.
-                     */
-        HashMap<String, Integer[]> datosPorGenero = new HashMap<>();
-        ListaSimple lista = Banda.lista;
-        Banda current;
-        boolean isInMap;
-        Integer[] values;
-        String[] discos;
-        int size;
-
-        for (int i = 0; i < lista.size(); i++){
-            current = lista.getAtPosition(i);
-            isInMap = false;
-            for(String key : datosPorGenero.keySet()){
-                if (current.getGenero().toLowerCase().equals(key.toLowerCase())){
-                    values = datosPorGenero.get(key);
-                    values[0] += 1;
-                    discos = current.getDiscos();
-                    if (key.toLowerCase().equals("tango")){
-                        print(discos[0]);
-                    }
-                    if (!discos[0].equals("")){
-                        values[1] += current.getDiscos().length;
-                    }
-                    values[2] += current.getIntegrantes();
-                    datosPorGenero.replace(key, values);
-                    isInMap = true;
-                }
-            }
-
-            if (!isInMap){
-                discos = current.getDiscos();
-                if (!discos[0].equals("")){
-                    size = discos.length;
-                } else {
-                    size = 0;
-                }
-                datosPorGenero.put(current.getGenero(), new Integer[] {1, size, current.getIntegrantes()});
-            }
-
-        }
-
-        String s = "Datos por genero: \n";
-
-        for (String key : datosPorGenero.keySet()){
-            values = datosPorGenero.get(key);
-            s += "- " + key + ". Cantidad de bandas: " + values[0] + ". Cantidad de discos: " + values[1] + ". Cantidad de Integrantes: " + values[2] +"\n";
-        }
-
-        print(s);
-    }
 }
