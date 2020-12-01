@@ -23,14 +23,12 @@ public class Ejecutable {
             switch (menu()) {
                 case 1:
                     visualizarBandas();
-                    presionarEnter();
                     break;
                 case 2:
                     /*
                     2. Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relacion con el total.
                      */
                     System.out.print("Un " + Banda.porcentajeBandas + "% de las bandas se inscribieron antes del 31/12/10");
-                	presionarEnter();
                     break;
                 case 3:
                     /*
@@ -38,14 +36,12 @@ public class Ejecutable {
                     personalidad que prevalece segun los estudios mostrados anteriormente.
                      */
                     personalidadPorBarrio(musicaPersonalidad);
-                    presionarEnter();
                     break;
                 case 4:
                     /*
                     4. Visualizar la informacion de las bandas almacenadas en el arbol usando Recorrido InOrden.
                      */
                     Banda.arbol.inorden();
-                    presionarEnter();
                     break;
                 case 5:
                     /*
@@ -53,42 +49,36 @@ public class Ejecutable {
                     Conjunto de barrios y el Map llamado bandas.
                      */
                 	BandasPorBarrio();
-                    presionarEnter();
                     break;
                 case 6:
                     /*
                     6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabeticamente.
                      */
                     BandasPorBarrio6();
-                    presionarEnter();
                     break;
                 case 7:
                     /*
                     7. Crear una estructura a su eleccion que permita almacenar y mostrar la cantidad de bandas,
                     discos y la cantidad de integrantes por genero musical.
                      */
-                    presionarEnter();
                     break;
                 case 8:
                     /*
                     8. Visualizar el Promedio de integrantes por Genero musical.
                      */
                     promedioIntegrantesGenero();
-                    presionarEnter();
                     break;
                 case 9:
                     /*
                     9. Visualizar las 10 primeras bandas con mas presencia en las redes sociales.
                      */
                     Banda.calcularPresenciaEnRedes();
-                    presionarEnter();
                     break;
                 case 10:
                     /*
                     10. Mostar en cada barrio cual es el genero de musica que las bandas tocan mas.
                      */
                     Banda.lista.printGeneroPorBarrio();
-                    presionarEnter();
                     break;
                 case 11:
                     deseaSalir = true;
@@ -96,6 +86,9 @@ public class Ejecutable {
                     break;
                 default:
                     print("Por favor ingrese un numero entre 1 y 11.");
+            }
+            if (!deseaSalir) {
+                presionarEnter();
             }
         } while (!deseaSalir);
 	}
