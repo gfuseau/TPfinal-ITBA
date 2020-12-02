@@ -74,8 +74,7 @@ public class GeneradorDeTablas {
 
         String tituloFormat = tituloSB.toString();
         String titulo = String.format(tituloFormat, (Object[]) titulos);
-        //TODO: comente el repeat porque no es compatible con versiones mas viejas de Java
-        String barra = "-"; //.repeat(ancho);
+        String barra = String.format("%0" + ancho + "d", 0).replace("0", "-");
         tablaSB.insert(0, barra + "\n");
         tablaSB.insert(0, titulo);
         tablaSB.append(barra + "\n");

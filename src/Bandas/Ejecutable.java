@@ -1,17 +1,8 @@
 package Bandas;
 
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.InputMismatchException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeMap;
 import java.io.*;
-import java.util.Arrays;
-import java.util.Arrays;
 import java.util.*;
 public class Ejecutable {
 	
@@ -240,7 +231,7 @@ public class Ejecutable {
     public static void personalidadPorBarrio(HashMap<String, String[]> musicaPersonalidad) {
         HashMap<String, String> generoPorBarrio = Banda.lista.generoPorBarrio();
         String genero;
-        String string = "La personalidad que prevalece en cada barrio es:";
+        System.out.println("La personalidad que prevalece en cada barrio es:");
 
         GeneradorDeTablas tabla = new GeneradorDeTablas(2, "BARRIO (GENERO)", "PERSONALIDAD");
         for (String barrio : generoPorBarrio.keySet()) {
@@ -289,7 +280,7 @@ public class Ejecutable {
             integrantesPorGenero.replace(current.getGenero().toLowerCase(), currentValues);
         }
 
-        String s = "Promedio de Integrantes por genero:\n";
+        System.out.println("Promedio de Integrantes por genero:\n");
 
         GeneradorDeTablas tabla = new GeneradorDeTablas(2, "GENERO", "PROMEDIO");
         for (String key : integrantesPorGenero.keySet()){
@@ -299,7 +290,6 @@ public class Ejecutable {
             tabla.anadirFila(key, promedio);
         }
         tabla.imprimirTabla();
-        // print(s);
 
     }
 
