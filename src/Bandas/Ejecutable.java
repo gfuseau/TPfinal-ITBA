@@ -97,13 +97,13 @@ public class Ejecutable {
 
     private static void bandasInscritasAntesDeTalFecha() {
         System.out.print(
-                "Un " + Banda.porcentajeBandas + "% de las bandas se inscribieron antes del 31/12/10");
+                "\nUn " + Banda.porcentajeBandas + "% de las bandas se inscribieron antes del 31/12/10\n");
     }
 
     public static int pedirInt(String frase) {
         while (true) {
             try {
-                print(frase);
+                System.out.print(frase);
                 int in = scanner.nextInt();
                 scanner.nextLine();
                 return in;
@@ -121,7 +121,8 @@ public class Ejecutable {
     }
 
     public static int menu() {
-        print("\n------------------------------------------------------------\n");
+        final String barra = "-------------------------------------------------------------------";
+        print(barra);
         print("Elija una opcion del siguiente menu:\n" + "[1]  Visualizar la cantidad de bandas en un barrio.\n"
                 + "[2]  Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relacion con el total.\n"
                 + "[3]  Visualizar para cada barrio segun el genero musical mas tocado por las bandas, la personalidad que prevalece segun los estudios mostrados anteriormente.\n"
@@ -133,9 +134,8 @@ public class Ejecutable {
                 + "[9]  Visualizar las 10 primeras bandas con mas presencia en las redes sociales.\n"
                 + "[10] Mostrar en cada barrio cual es el genero de musica que las bandas tocan mas.\n"
                 + "[11] Salir.");
-        print("\n------------------------------------------------------------");
-
-        return pedirInt("");
+        print(barra);
+        return pedirInt("> ");
     }
 
     public static void generarTitulo() {
@@ -197,7 +197,7 @@ public class Ejecutable {
             return;
         }
         int n = Banda.contarBandasPorBarrio(barrio);
-        printf("En el barrio de %s hay %d bandas.\n", barrio, n);
+        printf("\nEn el barrio de %s hay %d bandas.\n", barrio, n);
     }
 
     public static void presionarEnter() {
@@ -430,14 +430,11 @@ public class Ejecutable {
 
         String s = "Datos por genero: \n";
         print(s);
-        // System.out.println(s);
 
         GeneradorDeTablas tabla = new GeneradorDeTablas(4, "ASDF", "CANT BANDAS", "CANT DISCOS", "INTEGRANTES");
         for (String key : datosPorGenero.keySet()) {
             values = datosPorGenero.get(key);
             tabla.anadirFila(key, values[0], values[1], values[2]);
-            // s += "- " + key + ". Cantidad de bandas: " + values[0] + ". Cantidad de discos: " + values[1]
-            //        + ". Cantidad de Integrantes: " + values[2] + "\n";
         }
         tabla.imprimirTabla();
 

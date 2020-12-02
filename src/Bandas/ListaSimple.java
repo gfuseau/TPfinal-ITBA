@@ -113,8 +113,6 @@ public class ListaSimple {
     }
 
     public HashMap<String, String> generoPorBarrio() {
-        // TODO: si hay varios generos con la misma cantiidad de bandas, solo da el
-        // primero. Se podria cambiar para que de todos.
         HashMap<String, HashMap<String, Integer>> contador = generosPorBarrio();
         HashMap<String, String> generoPorBarrio = new HashMap<>();
         Set<String> generos;
