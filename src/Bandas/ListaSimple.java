@@ -144,12 +144,14 @@ public class ListaSimple {
     public void printGeneroPorBarrio() {
         HashMap<String, String> generoPorBarrio = generoPorBarrio();
         String string = "El genero que mas bandas tocan por barrio es:";
+        System.out.println(string);
 
+        GeneradorDeTablas tabla = new GeneradorDeTablas(2, "BARRIO", "GENERO");
         for (String barrio : generoPorBarrio.keySet()) {
+            tabla.anadirFila(barrio, generoPorBarrio.get(barrio));
             string += "\n- " + barrio + ": " + generoPorBarrio.get(barrio);
         }
-
-        System.out.println(string);
+        tabla.imprimirTabla();
     }
 
     public Banda getAtPosition(int i){
@@ -161,5 +163,4 @@ public class ListaSimple {
         }
         return current.getBanda();
     }
-
 }

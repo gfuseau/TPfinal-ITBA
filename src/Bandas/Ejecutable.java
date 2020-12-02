@@ -4,13 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.*;
 import java.util.*;
+
 public class Ejecutable {
-	
-	public static Scanner scanner = new Scanner(System.in);
+
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-		generarTitulo();
-		leerCSV();
+        generarTitulo();
+        leerCSV();
         HashMap<String, String[]> musicaPersonalidad = iniciarMusicaPersonalidad();
 
         boolean deseaSalir = false;
@@ -21,57 +22,62 @@ public class Ejecutable {
                     break;
                 case 2:
                     /*
-                    2. Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relacion con el total.
+                     * 2. Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en
+                     * relacion con el total.
                      */
-                    System.out.print("Un " + Banda.porcentajeBandas + "% de las bandas se inscribieron antes del 31/12/10");
+                    bandasInscritasAntesDeTalFecha();
                     break;
                 case 3:
                     /*
-                    3. Visualizar para cada barrio segun el genero musical mas tocado por las bandas, la
-                    personalidad que prevalece segun los estudios mostrados anteriormente.
+                     * 3. Visualizar para cada barrio segun el genero musical mas tocado por las
+                     * bandas, la personalidad que prevalece segun los estudios mostrados
+                     * anteriormente.
                      */
                     personalidadPorBarrio(musicaPersonalidad);
                     break;
                 case 4:
                     /*
-                    4. Visualizar la informacion de las bandas almacenadas en el arbol usando Recorrido InOrden.
+                     * 4. Visualizar la informacion de las bandas almacenadas en el arbol usando
+                     * Recorrido InOrden.
                      */
                     Banda.arbol.inorden();
                     break;
                 case 5:
                     /*
-                    5. Visualizar la cantidad de Bandas por Barrio: ordenada por cantidad de bandas, usando el
-                    Conjunto de barrios y el Map llamado bandas.
+                     * 5. Visualizar la cantidad de Bandas por Barrio: ordenada por cantidad de
+                     * bandas, usando el Conjunto de barrios y el Map llamado bandas.
                      */
-                	BandasPorBarrio();
+                    BandasPorBarrio5();
                     break;
                 case 6:
                     /*
-                    6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio alfabeticamente.
+                     * 6. Visualizar la cantidad de Bandas por Barrio: ordenada por barrio
+                     * alfabeticamente.
                      */
                     BandasPorBarrio6();
                     break;
                 case 7:
                     /*
-                    7. Crear una estructura a su eleccion que permita almacenar y mostrar la cantidad de bandas,
-                    discos y la cantidad de integrantes por genero musical.
+                     * 7. Crear una estructura a su eleccion que permita almacenar y mostrar la
+                     * cantidad de bandas, discos y la cantidad de integrantes por genero musical.
                      */
                     break;
                 case 8:
                     /*
-                    8. Visualizar el Promedio de integrantes por Genero musical.
+                     * 8. Visualizar el Promedio de integrantes por Genero musical.
                      */
                     promedioIntegrantesGenero();
                     break;
                 case 9:
                     /*
-                    9. Visualizar las 10 primeras bandas con mas presencia en las redes sociales.
+                     * 9. Visualizar las 10 primeras bandas con mas presencia en las redes sociales.
                      */
                     Banda.calcularPresenciaEnRedes();
                     break;
                 case 10:
                     /*
-                    10. Mostar en cada barrio cual es el genero de musica que las bandas tocan mas.
+                     * 10. Mostar en cada barrio cual es el genero de musica que las bandas tocan
+                     * mas.
                      */
                     Banda.lista.printGeneroPorBarrio();
                     break;
@@ -86,11 +92,16 @@ public class Ejecutable {
                 presionarEnter();
             }
         } while (!deseaSalir);
-	}
+    }
 
-	public static int pedirInt(String frase) {
-        while(true) {
-            try {  
+    private static void bandasInscritasAntesDeTalFecha() {
+        System.out.print(
+                "Un " + Banda.porcentajeBandas + "% de las bandas se inscribieron antes del 31/12/10");
+    }
+
+    public static int pedirInt(String frase) {
+        while (true) {
+            try {
                 print(frase);
                 int in = scanner.nextInt();
                 scanner.nextLine();
@@ -110,8 +121,7 @@ public class Ejecutable {
 
     public static int menu() {
         print("\n------------------------------------------------------------\n");
-        print("Elija una opcion del siguiente menu:\n"
-                + "[1]  Visualizar la cantidad de bandas en un barrio.\n"
+        print("Elija una opcion del siguiente menu:\n" + "[1]  Visualizar la cantidad de bandas en un barrio.\n"
                 + "[2]  Visualizar porcentaje de bandas inscritas antes del 31/12/2010, en relacion con el total.\n"
                 + "[3]  Visualizar para cada barrio segun el genero musical mas tocado por las bandas, la personalidad que prevalece segun los estudios mostrados anteriormente.\n"
                 + "[4]  Visualizar la informacion de las bandas almacenadas en el arbol usando Recorrido InOrden.\n"
@@ -128,10 +138,8 @@ public class Ejecutable {
     }
 
     public static void generarTitulo() {
-        final String titulo = "Trabajo Practico Final de Estructura de Datos y Programacion\n\n"
-                + "Integrantes:\n"
-                + "\t Gaston Emanuel Fuseau \t 57433 \n"
-                + "\t Ramiro Vozzi \t\t 57741 \n"
+        final String titulo = "Trabajo Practico Final de Estructura de Datos y Programacion\n\n" + "Integrantes:\n"
+                + "\t Gaston Emanuel Fuseau \t 57433 \n" + "\t Ramiro Vozzi \t\t 57741 \n"
                 + "\t Bautista Cardenau \t 58040";
         print(titulo);
     }
@@ -152,7 +160,8 @@ public class Ejecutable {
                     System.exit(0);
                 }
             } catch (ParseException e) {
-                // Esto significa que hubo un error parseando la fecha de la columna 4 del csv. Con este csv nunca pasaria.
+                // Esto significa que hubo un error parseando la fecha de la columna 4 del csv.
+                // Con este csv nunca pasaria.
                 e.printStackTrace();
                 break;
             }
@@ -238,12 +247,10 @@ public class Ejecutable {
             genero = generoPorBarrio.get(barrio);
             for (String key : musicaPersonalidad.keySet()) {
                 if (genero.contains(key)) {
-                    // string += "\n- " + barrio + " (" + genero + "): " + arrayToString(musicaPersonalidad.get(key));
                     tabla.anadirFila(barrio + " (" + genero + ")", arrayToString(musicaPersonalidad.get(key)));
                 }
             }
         }
-        // print(string);
         tabla.imprimirTabla();
     }
 
@@ -262,17 +269,17 @@ public class Ejecutable {
 
     }
 
-    public static void promedioIntegrantesGenero(){
+    public static void promedioIntegrantesGenero() {
         HashMap<String, Integer[]> integrantesPorGenero = new HashMap<>();
-        for (String genero : Banda.generos){
-            integrantesPorGenero.put(genero.toLowerCase(), new Integer[] {0,0});
+        for (String genero : Banda.generos) {
+            integrantesPorGenero.put(genero.toLowerCase(), new Integer[] { 0, 0 });
         }
 
         Banda current;
         ListaSimple lista = Banda.lista;
         Integer[] currentValues;
 
-        for (int i = 0; i < lista.size(); i++){
+        for (int i = 0; i < lista.size(); i++) {
             current = lista.getAtPosition(i);
             currentValues = integrantesPorGenero.get(current.getGenero().toLowerCase());
             currentValues[0] += current.getIntegrantes();
@@ -283,9 +290,10 @@ public class Ejecutable {
         System.out.println("Promedio de Integrantes por genero:\n");
 
         GeneradorDeTablas tabla = new GeneradorDeTablas(2, "GENERO", "PROMEDIO");
-        for (String key : integrantesPorGenero.keySet()){
+        for (String key : integrantesPorGenero.keySet()) {
             currentValues = integrantesPorGenero.get(key);
-            // s += "- " + key + ": " + Double.toString((double) (currentValues[0] * 100 / currentValues[1]) / 100) + "\n";
+            // s += "- " + key + ": " + Double.toString((double) (currentValues[0] * 100 /
+            // currentValues[1]) / 100) + "\n";
             String promedio = String.format("%.2f", (currentValues[0] * 100.0 / currentValues[1]) / 100.0);
             tabla.anadirFila(key, promedio);
         }
@@ -293,7 +301,7 @@ public class Ejecutable {
 
     }
 
-    public static void BandasPorBarrio() {
+    public static void BandasPorBarrio5() {
         HashMap<String, Integer> BandasPorBarrio = new HashMap<>();
         Set<Integer> Ordenado = new HashSet<>();
         for (String barrio : Banda.barrios) {
@@ -319,29 +327,35 @@ public class Ejecutable {
             currentValue = 0;
         }
         String s = "Cantidad de bandas por barrio:\n";
-        
-        int n=Ordenado.size();
-        int k=0;
+        System.out.println(s);
+
+        int n = Ordenado.size();
+        int k = 0;
         int[] arr = new int[n];
-        for (int i: Ordenado) {
-        	arr[k]=i;
-        	k++;
-        }        
-        Arrays.sort(arr);
-        for (int i = n - 1; i >= 0; i--) {
-	        for (String key : BandasPorBarrio.keySet()) {
-	            currentValue = BandasPorBarrio.get(key);
-	            if(currentValue==arr[i]) {	
-	            	s += "- " + key + ": " + currentValue + "\n";
-	            }
-	        }
+        for (int i : Ordenado) {
+            arr[k] = i;
+            k++;
         }
-        print(s);
+        Arrays.sort(arr);
+
+        GeneradorDeTablas tabla = new GeneradorDeTablas(2, "BARRIO", "BANDAS");
+        for (int i = n - 1; i >= 0; i--) {
+            for (String key : BandasPorBarrio.keySet()) {
+                currentValue = BandasPorBarrio.get(key);
+                if (currentValue == arr[i]) {
+                    tabla.anadirFila(key, currentValue);
+                    s += "- " + key + ": " + currentValue + "\n";
+                }
+            }
+        }
+        tabla.imprimirTabla();
     }
 
     public static void BandasPorBarrio6() {
         TreeMap<String, Integer> BandasPorBarrio = new TreeMap<>();
         String s = "Cantidad de bandas por barrio:\n";
+        System.out.println(s);
+
         for (String barrio : Banda.barrios) {
             BandasPorBarrio.put(barrio.toLowerCase(), 0);
         }
@@ -362,12 +376,13 @@ public class Ejecutable {
             BandasPorBarrio.replace(barrio, currentValue);
             currentValue = 0;
         }
+
+        GeneradorDeTablas tabla = new GeneradorDeTablas(2, "BARRIO", "BANDAS");
         for (String key : BandasPorBarrio.keySet()) {
             currentValue = BandasPorBarrio.get(key);
-            s += "- " + key + ": " + currentValue + "\n";
+            tabla.anadirFila(key, currentValue);
         }
 
-        print(s);
+        tabla.imprimirTabla();
     }
-
 }

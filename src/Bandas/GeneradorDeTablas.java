@@ -10,7 +10,6 @@ public class GeneradorDeTablas {
     private int ancho;
     private boolean incluirTitulos = false;
     private int[] caracteresPorColumna;
-    // private String[] stringsPorColumna;
     private String[] titulos;
 
     public GeneradorDeTablas(int columnas) {

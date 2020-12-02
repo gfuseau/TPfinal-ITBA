@@ -23,13 +23,11 @@ public class Banda {
     static Set<String> generos = new HashSet<String>();
     static Set<String> barrios = new HashSet<String>();
     static HashMap<String, ListaSimpleCadenas> bandas = new HashMap<>();
-    //TODO: tenemos muchos static, hay que ver cuales pueden sacarse
     static int cant = 0;
     static int total = 0;
     static double porcentajeBandas;
     static Date FECHA_A_COMPARAR;
 
-    //TODO: mirar si no se puede hacer sin usar static, mismo para la fecha a comparar
     static {
         try {
             FECHA_A_COMPARAR = Ejecutable.parseDate("31/12/10");
