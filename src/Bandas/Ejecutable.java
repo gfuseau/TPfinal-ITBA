@@ -61,6 +61,7 @@ public class Ejecutable {
                      * 7. Crear una estructura a su eleccion que permita almacenar y mostrar la
                      * cantidad de bandas, discos y la cantidad de integrantes por genero musical.
                      */
+                    datosPorGenero();
                     break;
                 case 8:
                     /*
@@ -384,5 +385,61 @@ public class Ejecutable {
         }
 
         tabla.imprimirTabla();
+    }
+
+        public static void datosPorGenero() {
+        HashMap<String, Integer[]> datosPorGenero = new HashMap<>();
+        ListaSimple lista = Banda.lista;
+        Banda current;
+        boolean isInMap;
+        Integer[] values;
+        String[] discos;
+        int size;
+
+        for (int i = 0; i < lista.size(); i++) {
+            current = lista.getAtPosition(i);
+            isInMap = false;
+            for (String key : datosPorGenero.keySet()) {
+                if (current.getGenero().toLowerCase().equals(key.toLowerCase())) {
+                    values = datosPorGenero.get(key);
+                    values[0] += 1;
+                    discos = current.getDiscos();
+                    if (key.toLowerCase().equals("tango")) {
+                        print(discos[0]);
+                    }
+                    if (!discos[0].equals("")) {
+                        values[1] += current.getDiscos().length;
+                    }
+                    values[2] += current.getIntegrantes();
+                    datosPorGenero.replace(key, values);
+                    isInMap = true;
+                }
+            }
+
+            if (!isInMap) {
+                discos = current.getDiscos();
+                if (!discos[0].equals("")) {
+                    size = discos.length;
+                } else {
+                    size = 0;
+                }
+                datosPorGenero.put(current.getGenero(), new Integer[] { 1, size, current.getIntegrantes() });
+            }
+
+        }
+
+        String s = "Datos por genero: \n";
+        print(s);
+        // System.out.println(s);
+
+        GeneradorDeTablas tabla = new GeneradorDeTablas(4, "ASDF", "CANT BANDAS", "CANT DISCOS", "INTEGRANTES");
+        for (String key : datosPorGenero.keySet()) {
+            values = datosPorGenero.get(key);
+            tabla.anadirFila(key, values[0], values[1], values[2]);
+            // s += "- " + key + ". Cantidad de bandas: " + values[0] + ". Cantidad de discos: " + values[1]
+            //        + ". Cantidad de Integrantes: " + values[2] + "\n";
+        }
+        tabla.imprimirTabla();
+
     }
 }

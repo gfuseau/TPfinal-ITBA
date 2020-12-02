@@ -29,7 +29,7 @@ public class GeneradorDeTablas {
         this(columnas, true);
         this.titulos = titulos;
     }
-    
+
     public String getTabla() {
         return tabla;
     }
@@ -117,7 +117,7 @@ public class GeneradorDeTablas {
 
     public void imprimirTabla() {
         generarTabla();
-        System.out.println(tabla);        
+        System.out.println(tabla);
     }
 
 }
