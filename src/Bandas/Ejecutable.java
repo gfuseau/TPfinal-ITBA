@@ -229,6 +229,8 @@ public class Ejecutable {
         musicaPersonalidad.put("rap", new String[] { "Alta autoestima", "Creativos", "Amables", "Extrovertidos" });
         musicaPersonalidad.put("opera", new String[] { "Alta autoestima", "Creativos", "Amables", "Extrovertidos" });
         musicaPersonalidad.put("clasica", new String[] { "Alta autoestima", "Creativos", "Amables", "Introvertidos" });
+        musicaPersonalidad.put("funk", new String[] { "No tiene personalidad asociada" });
+        musicaPersonalidad.put("hip hop", new String[] { "No tiene el hip hop" });
         musicaPersonalidad.put("country", new String[] { "Trabajadores", "Extrovertidos" });
         musicaPersonalidad.put("reggae", new String[] { "Alta autoestima", "Creativos", "Amables", "Extrovertidos", "Vagos" });
         musicaPersonalidad.put("dance", new String[] { "Creativos", "Poco amables", "Extrovertidos" });
